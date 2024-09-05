@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash; // ここを追加
+use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -13,8 +14,9 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
+        // バリデーションは RegisterRequest により自動的に行われる
         $credentials = $request->only('email', 'password');
 
         // ユーザーの存在を確認
@@ -36,5 +38,6 @@ class LoginController extends Controller
             dd('ユーザーが見つかりません');
         }
     }
+
 
 }

@@ -28,22 +28,34 @@
                 @csrf
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="text" name="name" placeholder="名前" autocomplete="name" required />
+                        <input type="text" name="name" placeholder="名前" value="{{ old('name') }}" />
+                        @error('name')
+                        <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="email" name="email" placeholder="メールアドレス" autocomplete="email" required />
+                        <input type="email" name="email" placeholder="メールアドレス" value="{{ old('email') }}" />
+                        @error('email')
+                        <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="password" name="password" placeholder="パスワード" autocomplete="new-password" required />
+                        <input type="password" name="password" placeholder="パスワード" value="{{ old('password') }}" />
+                        @error('password')
+                        <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="password" name="password_confirmation" placeholder="確認用パスワード" autocomplete="new-password" required />
+                        <input type="password" name="password_confirmation" placeholder="確認用パスワード" value="{{ old('password_confirmation') }}" />
+                        @error('password_confirmation')
+                        <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form__button">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Member; // Memberモデルを使用
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 
 class RegisterController extends Controller
 {
@@ -15,14 +16,9 @@ class RegisterController extends Controller
     }
 
     // 会員登録処理の実行
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        // バリデーション
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:members', // 'users' を 'members' に変更
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        // バリデーションは RegisterRequest により自動的に行われる
 
         // 新しいメンバーの作成
         $member = Member::create([

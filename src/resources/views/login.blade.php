@@ -28,12 +28,18 @@
                 @csrf
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="email" name="email" placeholder="メールアドレス" value="{{ old('email') }}" required />
+                        <input type="email" name="email" placeholder="メールアドレス" value="{{ $contact['email'] ?? '' }}" readonly />
+                        @error('email')
+                        <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="password" name="password" placeholder="パスワード" required />
+                        <input type="password" name="password" placeholder="パスワード" value="{{ $contact['password'] ?? '' }}" readonly />
+                        @error('password')
+                        <div class="form__error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form__button">
