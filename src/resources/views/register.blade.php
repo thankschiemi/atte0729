@@ -65,7 +65,7 @@
                     <p class="form__nav-text">アカウントをお持ちでない方はこちらから</p>
                 </div>
                 <div class="form__cta">
-                    <a href="/login" class="form__cta-text">ログイン</a>
+                    <a href="{{ route('login') }}" class="form__cta-text">ログイン</a>
                 </div>
             </form>
         </div>

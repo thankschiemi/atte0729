@@ -28,7 +28,7 @@
                 @csrf
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="email" name="email" placeholder="メールアドレス" value="{{ $contact['email'] ?? '' }}" readonly />
+                        <input type="email" name="email" placeholder="メールアドレス" value="{{ $contact['email'] ?? '' }}"/>
                         @error('email')
                         <div class="form__error">{{ $message }}</div>
                         @enderror
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form__group">
                     <div class="form__input--text">
-                        <input type="password" name="password" placeholder="パスワード" value="{{ $contact['password'] ?? '' }}" readonly />
+                        <input type="password" name="password" placeholder="パスワード" value="{{ $contact['password'] ?? '' }}"/>
                         @error('password')
                         <div class="form__error">{{ $message }}</div>
                         @enderror
@@ -49,7 +49,7 @@
                     <p class="form__nav-text">アカウントをお持ちでない方はこちらから</p>
                 </div>
                 <div class="form__cta">
-                    <a href="/register" class="form__cta-text">会員登録</a>
+                    <a href="{{ route('register') }}" class="form__cta-text">会員登録</a>
                 </div>
             </form>
         </div>
