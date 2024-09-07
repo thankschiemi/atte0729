@@ -66,8 +66,9 @@
 .schedule-table__header-row {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1.5px solid #aaaaaa;
-    padding: 10px 0;
+    border-top: 1.7px solid #aaaaaa; /* 上部の境界線 */
+    border-bottom: 1.7px solid #aaaaaa;
+    padding: 17px 0;
 }
 
 .schedule-table__header {
@@ -76,12 +77,11 @@
     padding: 10px 20px;
     white-space: nowrap;
 }
-
 .schedule-table__row {
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1.5px solid #aaaaaa;
-    padding: 20px 0;
+    text-align: left;
+    border-bottom: 1.7px solid #aaaaaa;
+    padding: 10px 0;
 }
 
 .schedule-table__cell {
@@ -90,15 +90,6 @@
     padding: 10px 20px;
     white-space: nowrap;
 }
-
-.schedule-table__cell:first-child {
-    text-align: left;
-}
-
-.schedule-table__cell:last-child {
-    text-align: right;
-}
-
 /* Pagination */
 .pagination {
     display: flex;
@@ -161,4 +152,24 @@
     color: black;
     font-weight: bold;
     font-size: 15px;
+}
+/* Attendance page specific responsive adjustments */
+@media (min-width: 1440px) {
+    .date-list__nav-button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .schedule-table__header, .schedule-table__cell {
+        padding: 15px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .date-list__nav-button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    .schedule-table__header, .schedule-table__cell {
+        padding: 10px 10px;
+    }
 }
