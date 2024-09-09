@@ -26,5 +26,8 @@ Route::post('/end-work', [AttendanceController::class, 'endWork'])->name('attend
 Route::post('/start-break', [AttendanceController::class, 'startBreak'])->name('attendance.startBreak');
 Route::post('/end-break', [AttendanceController::class, 'endBreak'])->name('attendance.endBreak');
 
+Route::get('/attendance/{date?}', [AttendanceController::class, 'showByDate'])->name('attendance.date');
 // 日付一覧ページ（ログインが必要）
 Route::get('/attendance', [AttendanceController::class, 'index'])->middleware('auth');
+
+

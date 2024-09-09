@@ -77,5 +77,32 @@ class AttendanceController extends Controller
 
         return redirect()->back()->with('status', '勤務終了しました！');
     }
+
+    public function showByDate($date = null)
+    {
+    // 日付が指定されていない場合は、現在の日付を使用
+    $currentDate = $date ? Carbon::parse($date) : Carbon::today();
+
+    // 前日と次日を計算
+    $prevDate = $currentDate->copy()->subDay()->toDateString();
+    $nextDate = $currentDate->copy()->addDay()->toDateString();
+
+    // 指定された日付の従業員データと休憩時間を取得
+    $employees = Date::with(['member', 'breaks'])
+        ->whereDate('date', $currentDate->toDateString())
+        ->paginate(5); // ページネーション付き
+
+    // ビューにデータを渡す
+    return view('attendance', [
+        'employees' => $employees,
+        'currentDate' => $currentDate->toDateString(),
+        'prevDate' => $prevDate,
+        'nextDate' => $nextDate
+    ]);
+    }
+
+
+
+
 }
 
