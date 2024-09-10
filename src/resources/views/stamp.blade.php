@@ -1,4 +1,3 @@
-<!-- resources/views/stamp.blade.php -->
 @extends('layouts.atte_layout')
 
 @section('title', 'Atte - 打刻ページ')
@@ -27,32 +26,42 @@
         <div class="atte-form__heading">
             <h1>{{ Auth::user()->name }}さんお疲れ様です！</h1>
         </div>
+
         <div class="form__button">
             <form action="{{ route('attendance.startWork') }}" method="POST">
                 @csrf
-                <button type="submit" class="form__button-submit {{ $buttonsEnabled['startWork'] ? '' : 'disabled' }}">
+                <button type="submit" class="form__button-submit" 
+                        @if(!$buttonsEnabled['startWork']) disabled @endif>
                     勤務開始
                 </button>
             </form>
+
             <form action="{{ route('attendance.endWork') }}" method="POST">
                 @csrf
-                <button type="submit" class="form__button-submit {{ $buttonsEnabled['endWork'] ? '' : 'disabled' }}">
+                <button type="submit" class="form__button-submit" 
+                        @if(!$buttonsEnabled['endWork']) disabled @endif>
                     勤務終了
                 </button>
             </form>
+
             <form action="{{ route('attendance.startBreak') }}" method="POST">
                 @csrf
-                <button type="submit" class="form__button-submit {{ $buttonsEnabled['startBreak'] ? '' : 'disabled' }}">
+                <button type="submit" class="form__button-submit" 
+                        @if(!$buttonsEnabled['startBreak']) disabled @endif>
                     休憩開始
                 </button>
             </form>
+
             <form action="{{ route('attendance.endBreak') }}" method="POST">
                 @csrf
-                <button type="submit" class="form__button-submit {{ $buttonsEnabled['endBreak'] ? '' : 'disabled' }}">
+                <button type="submit" class="form__button-submit" 
+                        @if(!$buttonsEnabled['endBreak']) disabled @endif>
                     休憩終了
                 </button>
             </form>
         </div>
     </div>
 @endsection
+
+
 

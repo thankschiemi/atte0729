@@ -1,11 +1,24 @@
 .header {
-    background: white;
+    width: 100%; /* 幅を100%に */
+    max-width: 1200px; /* 必要に応じて幅を指定（例: 1200px） */
+    margin: 0 auto; /* 中央揃え */
+    padding: 20px 0; /* 上下の余白 */
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.header__title {
+    font-size: 24px;
+    font-weight: bold;
+}
 .header__inner {
-    margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
+    max-width: 960px; /* 必要に応じて幅を調整 */
+    margin: 0 auto; /* 中央揃え */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header__logo {
@@ -15,11 +28,61 @@
     font-size: 24px;
 }
 
-.header-nav-item {
-    margin-right: 50px;
-    font-weight: bold;
+/* ナビゲーションのスタイル */
+.header-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+/* ヘッダーのナビゲーションリストを横並びにする */
+.header-nav-list {
+    display: flex; /* 横並び */
+    list-style: none; /* リストスタイルを削除 */
+    padding: 0; /* パディングを削除 */
+    margin: 0; /* マージンを削除 */
 }
 
+/* リスト内の各項目にスペースを追加 */
+.header-nav-item {
+    margin-right: 20px; /* 各リンク間のスペース */
+}
+
+.header-nav-item:last-child {
+    margin-right: 0; /* 最後の要素の右側スペースをなくす */
+}
+/* ヘッダーのナビゲーションリンクのスタイル */
+.header-nav-item a {
+    text-decoration: none; /* リンクの下線を削除 */
+    color: #000; /* リンクの色を黒に統一 */
+    font-weight: bold; /* 太字にする */
+    padding: 10px ; /* スペースを追加 */
+    display: inline-block; /* ボタン風にする */
+}
+
+.header-nav-item a:hover {
+    text-decoration: underline; /* ホバー時に下線を追加 */
+}
+
+/* ログアウトボタンのスタイルをリンクと統一する */
+.logout-button {
+    background-color: transparent; /* 背景を透明に */
+    border: none; /* ボーダーをなくす */
+    color: #000; /* テキストカラーをリンクと同じにする */
+    font-weight: bold; /* 太字にする */
+    cursor: pointer; /* カーソルをポインタに */
+    padding: 10px 15px; /* スペースを追加 */
+    text-decoration: none; /* 下線を削除 */
+    display: inline-block; /* ボタン風にする */
+}
+
+.logout-button:hover {
+    text-decoration: underline; /* ホバー時に下線を追加 */
+}
+/* ログアウトボタンのボーダーを削除 */
+form#logout-form {
+    display: inline-block; /* フォーム全体をボタンに対応 */
+}
 /* Footer 共通部分 */
 .footer {
     background: white;
@@ -54,24 +117,28 @@ button.disabled {
 /* Media Queries for Common Responsive Adjustments */
 @media (min-width: 1440px) {
     .header {
-        padding: 0 100px;
+        padding: 0 50px; /* パディングを縮小 */
     }
     .header-nav-item {
-        margin-right: 100px;
+        margin-right: 50px; /* ナビゲーション間のスペースを調整 */
     }
     .main-content {
-        padding: 50px 5px;
+        padding: 30px 5px; /* 余白を少なくする */
     }
 }
 
 @media (max-width: 600px) {
     .header {
-        padding: 0 20px;
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
     }
-    .header-nav-item {
-        margin-right: 20px;
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
     }
-    .main-content {
-        padding: 20px 5px;
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
     }
 }

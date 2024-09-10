@@ -24,9 +24,9 @@
 @section('content')
     <div class="date-list">
         <div class="date-list__navigation">
-            <a href="{{ route('attendance.date', ['date' => $prevDate]) }}" class="date-list__nav-button">＜</a>
+            <a href="{{ route('attendance.date', ['date' => $prevDate]) }}" class="date-list__nav-button"><</a>
             <span class="date-list__date">{{ $currentDate }}</span>
-            <a href="{{ route('attendance.date', ['date' => $nextDate]) }}" class="date-list__nav-button">＞</a>
+            <a href="{{ route('attendance.date', ['date' => $nextDate]) }}" class="date-list__nav-button">></a>
         </div>
     </div>
 

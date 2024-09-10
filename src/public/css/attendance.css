@@ -9,28 +9,48 @@
 
 /* Date List */
 .date-list__navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* 矢印ボタンと日付の間隔 */
     margin-bottom: 30px;
-    text-align: center;
     font-size: 20px;
 }
 
 .date-list__nav-button {
-    background-color: white;
-    border: 1px solid blue;
-    border-radius: 5px;
-    color: blue;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 16px;
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 横方向に中央揃え */
+    align-items: center; /* 縦方向に中央揃え */
+    background-color: white; /* 背景色を白に */
+    border: 2px solid #007bff; /* 枠線を青に */
+    border-radius: 5px; /* 角を少し丸める */
+    width: 30px; /* ボタンの幅を小さくする */
+    height: 30px; /* ボタンの高さを小さくする */
+    color: #007bff; /* テキストの色（矢印）を青に */
+    font-size: 14px; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字に */
+    cursor: pointer; /* クリック時のカーソルをポインタに */
+    text-decoration: none; /* 下線を削除 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* ホバー時のアニメーション */
 }
 
+/* ホバー時のスタイル */
 .date-list__nav-button:hover {
-    background-color: #e0e0e0;
+    background-color: #007bff; /* 背景色を青に */
+    color: white; /* 矢印の色を白に */
+    text-decoration: none; /* ホバー時も下線を削除 */
+}
+/* 矢印ボタン全体の配置 */
+.date-list__navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* 矢印ボタンと日付の間隔 */
 }
 
+/* 日付部分のスタイル */
 .date-list__date {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 24px; /* 日付のフォントサイズ */
+    font-weight: bold; /* 日付を太字に */
 }
 
 /* Schedule Table */
@@ -148,11 +168,17 @@
 }
 
 @media (max-width: 600px) {
-    .date-list__nav-button {
-        padding: 5px 10px;
-        font-size: 14px;
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
     }
-    .schedule-table__header, .schedule-table__cell {
-        padding: 10px 10px;
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
     }
 }

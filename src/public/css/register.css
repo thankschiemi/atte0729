@@ -93,11 +93,17 @@
 }
 
 @media (max-width: 600px) {
-    .date-list__nav-button {
-        padding: 5px 10px;
-        font-size: 14px;
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
     }
-    .schedule-table__header, .schedule-table__cell {
-        padding: 10px 10px;
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
     }
 }

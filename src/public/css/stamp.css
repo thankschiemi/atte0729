@@ -1,31 +1,4 @@
-/* ヘッダーのナビゲーションリンクのスタイル */
-.header-nav-item a {
-    text-decoration: none; /* リンクの下線を削除 */
-    color: #000; /* リンクの色を黒に統一 */
-    font-weight: bold; /* 太字にする */
-    padding: 10px 15px; /* スペースを追加 */
-    display: inline-block; /* ボタン風にする */
-}
 
-.header-nav-item a:hover {
-    text-decoration: underline; /* ホバー時に下線を追加 */
-}
-
-/* ログアウトボタンのスタイルをリンクと統一する */
-.logout-button {
-    background-color: transparent; /* 背景を透明に */
-    border: none; /* ボーダーをなくす */
-    color: #000; /* テキストカラーをリンクと同じにする */
-    font-weight: bold; /* 太字にする */
-    cursor: pointer; /* カーソルをポインタに */
-    padding: 10px 15px; /* スペースを追加 */
-    text-decoration: none; /* 下線を削除 */
-    display: inline-block; /* ボタン風にする */
-}
-
-.logout-button:hover {
-    text-decoration: underline; /* ホバー時に下線を追加 */
-}
 
 /* フォームのスタイル */
 .atte-form__content {
@@ -70,13 +43,21 @@
     text-align: center; /* テキストを中央揃えに */
 }
 
-/* 無効なボタン */
-button.disabled {
-    opacity: 0.6; /* 透明度を60%に設定 */
-    color: #333; /* 文字色を濃くする */
-    background-color: #ddd; /* 背景色をグレーに設定 */
+button:disabled {
+    background-color: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+.form__button-submit.disabled {
+    opacity: 0.6; /* 無効化されたボタンを半透明に */
+    cursor: not-allowed; /* カーソルを無効状態に */
 }
 
+.form__button-submit:disabled {
+    opacity: 0.6; /* 無効化されたボタンを半透明に */
+    cursor: not-allowed; /* カーソルを無効状態に */
+    background-color: #ddd; /* 背景色を灰色に */
+}
 /* 出席ページ固有のレスポンシブ調整 */
 @media (min-width: 1440px) {
     .date-list__nav-button {
@@ -87,26 +68,18 @@ button.disabled {
         padding: 15px 40px;
     }
 }
-
 @media (max-width: 600px) {
-    .date-list__nav-button {
-        padding: 5px 10px;
-        font-size: 14px;
-    }
-    .schedule-table__header, .schedule-table__cell {
-        padding: 10px 10px;
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
     }
 
-    /* レスポンシブ対応: フォームボタンの列を1列に変更 */
-    .form__button {
-        grid-template-columns: 1fr; /* 1列に変更 */
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
     }
-}
 
-/* ヘッダーのナビゲーションリンクとボタンのレスポンシブ対応 */
-@media (max-width: 600px) {
-    .header-nav-item a, .logout-button {
-        padding: 8px 12px;
-        font-size: 14px;
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
     }
 }
