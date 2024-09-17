@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class Member extends Authenticatable
+class Member extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -13,6 +14,7 @@ class Member extends Authenticatable
         'name',
         'email',
         'password',
+        'employee_id', // 追加: 社員IDフィールド
     ];
 
     protected $hidden = [

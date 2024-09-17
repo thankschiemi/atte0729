@@ -1,0 +1,122 @@
+/* メンバー一覧ページのタイトル */
+.member-list__title {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 32px;
+}
+
+/* 検索フォーム */
+.member-list__search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.member-list__search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    margin-right: 10px;
+}
+
+.member-list__search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.member-list__search-button:hover {
+    background-color: #0056b3;
+}
+
+/* テーブルスタイル */
+.member-list__table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.member-list__table-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.member-list__table-header-cell {
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.member-list__table-body {
+    text-align: left;
+}
+
+.member-list__table-row {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.member-list__table-cell {
+    padding: 15px;
+}
+
+.member-list__table-cell a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.member-list__table-cell a:hover {
+    text-decoration: underline;
+}
+
+.member-list__delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.member-list__delete-button:hover {
+    background-color: #c82333;
+}
+
+/* ページネーション */
+.member-list__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.member-list__pagination nav {
+    display: inline-block;
+}
+
+.member-list__pagination .page-link {
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+.member-list__pagination .page-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.member-list__pagination .active .page-link {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}

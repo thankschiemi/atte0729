@@ -24,8 +24,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:255', // ユニークルールを削除
-            'password' => 'required|string|min:8', // 確認ルールを削除
+            'email' => 'required',
+            'password' => 'required',
         ];
     }
     public function messages()

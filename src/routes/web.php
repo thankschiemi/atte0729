@@ -5,6 +5,11 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StampController;
 use App\Http\Controllers\AttendanceController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MemberController;
+
+// メール認証ルート
+Auth::routes(['verify' => true]);  // メール認証を有効にする
 
 // 会員登録ページ
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -17,17 +22,27 @@ Route::post('/login', [LoginController::class, 'login']);
 // ログアウトルート
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-// 打刻ページ（ログインが必要）
-Route::get('/', [StampController::class, 'index'])->middleware('auth');
+// 打刻ページ（ログイン + メール認証済みが必要）
+Route::get('/', [StampController::class, 'index'])->middleware(['auth', 'verified']);
 
 // 各ボタンの状態
-Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('attendance.startWork');
-Route::post('/end-work', [AttendanceController::class, 'endWork'])->name('attendance.endWork');
-Route::post('/start-break', [AttendanceController::class, 'startBreak'])->name('attendance.startBreak');
-Route::post('/end-break', [AttendanceController::class, 'endBreak'])->name('attendance.endBreak');
+Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('attendance.startWork')->middleware('auth', 'verified');
+Route::post('/end-work', [AttendanceController::class, 'endWork'])->name('attendance.endWork')->middleware('auth', 'verified');
+Route::post('/start-break', [AttendanceController::class, 'startBreak'])->name('attendance.startBreak')->middleware('auth', 'verified');
+Route::post('/end-break', [AttendanceController::class, 'endBreak'])->name('attendance.endBreak')->middleware('auth', 'verified');
 
-Route::get('/attendance/{date?}', [AttendanceController::class, 'showByDate'])->name('attendance.date');
-// 日付一覧ページ（ログインが必要）
-Route::get('/attendance', [AttendanceController::class, 'index'])->middleware('auth');
+// 日付一覧ページ（ログイン + メール認証済みが必要）
+Route::get('/attendance/{date?}', [AttendanceController::class, 'showByDate'])->name('attendance.date')->middleware(['auth', 'verified']);
+Route::get('/attendance', [AttendanceController::class, 'index'])->middleware(['auth', 'verified']);
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+// ユーザー一覧ページ
+Route::get('/members', [MemberController::class, 'index'])->name('members.index');
+Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
+Route::get('/members/{id}/edit', [MemberController::class, 'edit'])->name('members.edit');
+Route::put('/members/{id}', [MemberController::class, 'update'])->name('members.update');
+Route::delete('/members/{id}', [MemberController::class, 'destroy'])->name('members.destroy');
 

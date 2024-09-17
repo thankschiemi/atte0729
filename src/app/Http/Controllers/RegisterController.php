@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Member; // Memberモデルを使用
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Auth\Events\Registered; // 追加
 
 class RegisterController extends Controller
 {
@@ -29,5 +30,13 @@ class RegisterController extends Controller
 
         // /login ページへリダイレクト
         return redirect()->route('login'); // ルート名を指定
-    }
+    
+            // メール確認リンクを送信
+            event(new Registered($member)); // 追加
+
+            // メール確認ページへリダイレクト
+            return redirect('/email/verify'); // ルート名を指定
+        }
+
+
 }
