@@ -1,6 +1,6 @@
 @extends('layouts.atte_layout')
 
-@section('title', 'Atte - メンバー一覧')
+@section('title', 'Atte - ユーザー一覧')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/atte-member-page.css') }}" />
@@ -11,7 +11,7 @@
         <ul class="header-nav-list">
             <li class="header-nav-item"><a href="{{ url('/') }}">ホーム</a></li>
             <li class="header-nav-item"><a href="{{ url('/attendance') }}">日付一覧</a></li>
-            <li class="header-nav-item"><a href="{{ url('/members') }}">メンバー一覧</a></li>
+            <li class="header-nav-item"><a href="{{ url('/members') }}">ユーザー一覧</a></li>
             <li class="header-nav-item"><a href="{{ url('/timesheets') }}">勤怠表</a></li>
             <li class="header-nav-item">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -25,18 +25,20 @@
 
 @section('content')
     <div class="member-list">
-        <h1 class="member-list__title">メンバー一覧</h1>
+        <h2 class="member-list__title">ユーザー一覧</h2>
 
         <!-- 検索フォーム -->
-        <form class="member-list__search-form" action="{{ route('members.index') }}" method="GET">
-            <input class="member-list__search-input" type="text" name="search" placeholder="名前またはメールアドレスで検索" value="{{ request('search') }}">
-            <button class="member-list__search-button" type="submit">検索</button>
+        <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
+           <input class="user-list__search-input" type="text" name="search" placeholder="名前、メールアドレス、社員IDで検索" value="{{ request('search') }}">
+           <button class="user-list__search-button" type="submit">検索</button>
         </form>
+    </div>
 
         <!-- メンバー一覧テーブル -->
         <table class="member-list__table">
-            <thead class="member-list__table-header">
-                <tr>
+        　　<thead>
+            　　<tr class="member-list__table-header">
+               　　　<th class="member-list__table-header-cell">社員ID</th> <!-- 社員IDを追加 -->
                     <th class="member-list__table-header-cell">名前</th>
                     <th class="member-list__table-header-cell">メールアドレス</th>
                     <th class="member-list__table-header-cell">登録日</th>
@@ -46,6 +48,7 @@
             <tbody class="member-list__table-body">
                 @foreach($members as $member)
                     <tr class="member-list__table-row">
+                    　　<td class="member-list__table-cell">{{ $member->employee_id }}</td> <!-- 社員IDを追加 -->
                         <td class="member-list__table-cell">{{ $member->name }}</td>
                         <td class="member-list__table-cell">{{ $member->email }}</td>
                         <td class="member-list__table-cell">{{ $member->created_at->format('Y-m-d') }}</td>

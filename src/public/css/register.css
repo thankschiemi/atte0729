@@ -1,8 +1,12 @@
+body {
+    background-color: #eeeeee !important; /* ページ全体の背景色も同じにする */
+}
+
 .atte-form__content {
     margin: 0 auto;
     padding: 80px 15px;
     width: 100%;
-    background: #eeeeee;
+    background-color: #eeeeee !important;
 }
 
 .atte-form__heading {

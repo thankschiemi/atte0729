@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Member; // Memberモデルを使用
+use App\Models\Member;
+use App\Http\Requests\MemberRequest;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -10,13 +11,21 @@ class MemberController extends Controller
     /**
      * メンバーの一覧表示
      */
-    public function index()
+    public function index(Request $request)
     {
-        // ページネーションでメンバーを5件ずつ取得
-        $members = Member::paginate(5);
+        $query = Member::query();
 
-        // 'atte-member-page' というBladeテンプレートにデータを渡して表示
-        return view('atte-member-page', compact('members'));
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('employee_id', 'like', "%{$search}%");
+        }
+
+        $members = $query->paginate(5);
+
+        return view('members.atte-member-page', compact('members'));
+
     }
 
     /**
@@ -24,11 +33,25 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        // IDをもとにメンバーを取得
         $member = Member::findOrFail($id);
+        return view('members.member-show', compact('member'));
+    }
 
-        // メンバー詳細表示用のビューにデータを渡す
-        return view('member-show', compact('member'));
+    /**
+     * メンバー作成フォームの表示
+     */
+    public function create()
+    {
+        return view('member-create');
+    }
+
+    /**
+     * 新しいメンバーを作成
+     */
+    public function store(MemberRequest $request)
+    {
+        Member::create($request->validated());
+        return redirect()->route('members.index')->with('success', '新しいメンバーが作成されました。');
     }
 
     /**
@@ -36,29 +59,17 @@ class MemberController extends Controller
      */
     public function edit($id)
     {
-        // IDをもとにメンバーを取得
         $member = Member::findOrFail($id);
-
-        // メンバー編集用フォームにデータを渡す
-        return view('member-edit', compact('member'));
+        return view('members.member-edit', compact('member'));
     }
 
     /**
      * メンバーの情報を更新する
      */
-    public function update(Request $request, $id)
+    public function update(MemberRequest $request, $id)
     {
-        // バリデーションを行う
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:members,email,' . $id,
-        ]);
-
-        // メンバーを取得し、更新する
         $member = Member::findOrFail($id);
-        $member->update($request->all());
-
-        // 成功メッセージとともに一覧ページにリダイレクト
+        $member->update($request->validated());
         return redirect()->route('members.index')->with('success', 'メンバー情報が更新されました。');
     }
 
@@ -67,12 +78,10 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        // メンバーをIDで取得して削除する
         $member = Member::findOrFail($id);
         $member->delete();
-
-        // 成功メッセージとともに一覧ページにリダイレクト
         return redirect()->route('members.index')->with('success', 'メンバーが削除されました。');
     }
 }
+
 

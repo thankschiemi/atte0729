@@ -1,11 +1,13 @@
-
+body {
+    background-color: #eeeeee !important; /* ページ全体の背景色も同じにする */
+}
 
 /* フォームのスタイル */
 .atte-form__content {
     margin: 0 auto;
     padding: 80px 20px;
     width: 100%;
-    background: #eeeeee;
+    background-color: #eeeeee !important;
     min-height: calc(100vh - 80px - 50px);
 }
 

@@ -14,7 +14,7 @@ class AddEmployeeIdToMembersTable extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            //
+            $table->string('employee_id')->unique(); // 社員IDを追加
         });
     }
 
@@ -26,7 +26,7 @@ class AddEmployeeIdToMembersTable extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-            //
+            $table->dropColumn('employee_id'); // 逆マイグレーション用に社員IDを削除
         });
     }
 }

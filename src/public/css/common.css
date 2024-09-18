@@ -1,39 +1,31 @@
 .header {
-    width: 100%; /* 幅を100%に */
-    max-width: 1200px; /* 必要に応じて幅を指定（例: 1200px） */
-    margin: 0 auto; /* 中央揃え */
-    padding: 20px 0; /* 上下の余白 */
+    display: flex;
+    justify-content: space-between; /* ロゴを左、ナビゲーションを右に */
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
     background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
-
-.header__title {
-    font-size: 24px;
-    font-weight: bold;
-}
+/* 最大幅を指定する */
 .header__inner {
-    max-width: 960px; /* 必要に応じて幅を調整 */
-    margin: 0 auto; /* 中央揃え */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    max-width: 1400px; /* 幅を広げる */
+    width: 100%;
+    margin: 0 auto;
 }
 
 .header__logo {
-    color: black;
     text-decoration: none;
     font-weight: bold;
     font-size: 24px;
+    color: black;
 }
 
 /* ナビゲーションのスタイル */
 .header-nav {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
     gap: 20px;
+    margin-left: auto; /* ナビゲーションを右側に移動 */
 }
 /* ヘッダーのナビゲーションリストを横並びにする */
 .header-nav-list {
@@ -42,15 +34,11 @@
     padding: 0; /* パディングを削除 */
     margin: 0; /* マージンを削除 */
 }
-
 /* リスト内の各項目にスペースを追加 */
 .header-nav-item {
-    margin-right: 20px; /* 各リンク間のスペース */
+    margin-left: 20px;
 }
 
-.header-nav-item:last-child {
-    margin-right: 0; /* 最後の要素の右側スペースをなくす */
-}
 /* ヘッダーのナビゲーションリンクのスタイル */
 .header-nav-item a {
     text-decoration: none; /* リンクの下線を削除 */

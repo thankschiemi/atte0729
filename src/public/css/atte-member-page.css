@@ -1,84 +1,131 @@
-/* メンバー一覧ページのタイトル */
-.member-list__title {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 32px;
+body {
+    background-color: #eeeeee !important; /* ページ全体の背景色も同じにする */
+}
+/* メインコンテンツ */
+.main-content {
+    margin: 0 auto;
+    padding: 30px 5px;
+    width: 100%;
+    min-height: calc(100vh - 180px);
 }
 
-/* 検索フォーム */
-.member-list__search-form {
-    display: flex;
-    justify-content: center;
+/* ユーザー一覧タイトル */
+.member-list__title {
+    text-align: center;
     margin-bottom: 30px;
 }
 
-.member-list__search-input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 300px;
-    margin-right: 10px;
+/* 検索フォームを中央に配置 */
+.user-list__search-form {
+    display: flex;
+    justify-content: center; /* 水平中央揃え */
+    gap: 10px; /* 入力フィールドとボタンの間隔 */
+    margin-bottom: 30px;
 }
 
-.member-list__search-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+/* 検索フィールド */
+.user-list__search-input {
+    padding: 15px;
     border: none;
     border-radius: 5px;
+    background: white;
+    color: black;
+    font-size: 12px;
+    width: 350px; /* 幅を指定 */
+}
+
+/* 検索ボタン */
+.user-list__search-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: blue;
+    color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
-.member-list__search-button:hover {
-    background-color: #0056b3;
-}
-
-/* テーブルスタイル */
+/* メンバー一覧テーブル */
 .member-list__table {
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 1300px; /* テーブルの最大幅を設定 */
+    margin: 0 auto; /* テーブルを中央揃え */
     border-collapse: collapse;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .member-list__table-header {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #dee2e6;
+    text-align: center;
+    border-top: 1.7px solid #aaaaaa; /* 上部の境界線 */
+    border-bottom: 1.7px solid #aaaaaa;
 }
 
 .member-list__table-header-cell {
-    padding: 15px;
-    text-align: left;
+    padding: 15px 20px;
+    white-space: nowrap;
     font-weight: bold;
 }
 
-.member-list__table-body {
-    text-align: left;
-}
-
-.member-list__table-row {
-    border-bottom: 1px solid #dee2e6;
-}
-
 .member-list__table-cell {
-    padding: 15px;
+    padding: 10px 20px;
+    text-align: center;
+}
+.member-list__table-cell:first-child {
+    width: 15%; /* 社員IDの幅 */
 }
 
-.member-list__table-cell a {
-    text-decoration: none;
+.member-list__table-cell:nth-child(2) {
+    width: 20%; /* 名前の幅 */
+}
+
+.member-list__table-cell:nth-child(3) {
+    width: 25%; /* メールアドレスの幅 */
+}
+
+.member-list__table-cell:nth-child(4) {
+    width: 20%; /* 登録日の幅 */
+}
+
+.member-list__table-cell:nth-child(5) {
+    width: 20%; /* アクションの幅 */
+}
+
+
+/* メンバー一覧テーブル ② */
+/* メンバー一覧テーブルのボディ */
+.member-list__table-body {
+    text-align: center; /* セルの内容を中央揃え */
+}
+
+/* メンバー一覧テーブルのセル */
+.member-list__table-cell {
+    padding: 15px 20px;
+    border-bottom: 1.7px solid #aaaaaa;
+    text-align: center;
+    word-wrap: break-word; /* 長いテキストを折り返す */
+}
+
+/* アクションリンク（詳細、編集リンクなど） */
+.member-list__action-link {
+    margin-right: 10px;
     color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.member-list__table-cell a:hover {
+.member-list__action-link:hover {
     text-decoration: underline;
+    color: #0056b3;
+}
+
+/* 削除ボタンのスタイル */
+.member-list__delete-form {
+    display: inline-block; /* フォームをインラインに */
 }
 
 .member-list__delete-button {
-    background-color: #dc3545;
+    background-color: #dd5a9c;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -90,33 +137,42 @@
     background-color: #c82333;
 }
 
+
 /* ページネーション */
-.member-list__pagination {
+.pagination {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    padding: 10px 0;
+    margin-top: 10px;
 }
 
-.member-list__pagination nav {
-    display: inline-block;
+.pagination__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.member-list__pagination .page-link {
-    padding: 8px 16px;
+.pagination__item {
+    margin: 0 2px;
+}
+
+.pagination__link {
+    padding: 4px 12px;
     border: 1px solid #007bff;
     color: #007bff;
+    border-radius: 3px;
     text-decoration: none;
-    margin: 0 5px;
-    border-radius: 5px;
 }
 
-.member-list__pagination .page-link:hover {
+.pagination__item--active .pagination__link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination__link:hover {
     background-color: #007bff;
     color: white;
 }
 
-.member-list__pagination .active .page-link {
-    background-color: #007bff;
-    color: white;
-    border: 1px solid #007bff;
-}

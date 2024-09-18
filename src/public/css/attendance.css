@@ -1,12 +1,10 @@
-/* Main Content */
-.main-content {
-    margin: 0 auto;
-    padding: 30px 5px;
-    width: 100%;
-    background: #eeeeee;
-    min-height: calc(100vh - 180px);
+html, body {
+    height: 100%;
+    background-color: #eeeeee !important;
 }
-
+.main-content {
+    background-color: #eeeeee !important;
+}
 /* Date List */
 .date-list__navigation {
     display: flex;
@@ -74,6 +72,7 @@
     padding: 10px 20px;
     white-space: nowrap;
 }
+/* メンバー一覧テーブル ② */
 .schedule-table__row {
     display: flex;
     text-align: left;

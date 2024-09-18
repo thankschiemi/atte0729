@@ -11,6 +11,8 @@
         <ul class="header-nav-list">
             <li class="header-nav-item"><a href="{{ url('/') }}">ホーム</a></li>
             <li class="header-nav-item"><a href="{{ url('/attendance') }}">日付一覧</a></li>
+            <li class="header-nav-item"><a href="{{ url('/members') }}">ユーザー一覧</a></li>
+            <li class="header-nav-item"><a href="{{ url('/timesheets') }}">勤怠表</a></li>
             <li class="header-nav-item">
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf

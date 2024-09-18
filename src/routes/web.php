@@ -37,12 +37,8 @@ Route::get('/attendance', [AttendanceController::class, 'index'])->middleware(['
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 // ユーザー一覧ページ
-Route::get('/members', [MemberController::class, 'index'])->name('members.index');
-Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
-Route::get('/members/{id}/edit', [MemberController::class, 'edit'])->name('members.edit');
-Route::put('/members/{id}', [MemberController::class, 'update'])->name('members.update');
-Route::delete('/members/{id}', [MemberController::class, 'destroy'])->name('members.destroy');
+Route::resource('members', MemberController::class)->middleware(['auth', 'verified']);
 
