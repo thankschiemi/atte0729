@@ -100,9 +100,5 @@ class AttendanceController extends Controller
         'nextDate' => $nextDate
     ]);
     }
-
-
-
-
 }
 

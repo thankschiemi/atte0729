@@ -24,6 +24,11 @@
 @endsection
 
 @section('content')
+<div class="atte-form__content">
+　　　　<div class="atte-form__heading">
+　　　　    <h1>{{ $user->name }}さんの勤怠表</h1> <!-- 特定のユーザー名を表示 -->
+　　　　</div>
+
     <div class="date-list">
         <div class="date-list__navigation">
             <a href="{{ route('attendance.date', ['date' => $prevDate]) }}" class="date-list__nav-button"><</a>

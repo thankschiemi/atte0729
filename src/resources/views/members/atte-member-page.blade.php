@@ -27,44 +27,41 @@
     <div class="member-list">
         <h2 class="member-list__title">ユーザー一覧</h2>
 
-        <!-- 検索フォーム -->
+    <div class="search-container">
+          <!-- 検索フォーム1 -->
         <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
-           <input class="user-list__search-input" type="text" name="search" placeholder="名前、メールアドレス、社員IDで検索" value="{{ request('search') }}">
+           <input class="user-list__search-input" type="text" name="employee_id" placeholder="社員IDで検索" value="{{ request('employee_id') }}">
+           <button class="user-list__search-button" type="submit">検索</button>
+        </form>
+          <!-- 検索フォーム2 -->
+        <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
+           <input class="user-list__search-input" type="text" name="name" placeholder="名前で検索" value="{{ request('name') }}">
            <button class="user-list__search-button" type="submit">検索</button>
         </form>
     </div>
+</div>
 
-        <!-- メンバー一覧テーブル -->
-        <table class="member-list__table">
-        　　<thead>
-            　　<tr class="member-list__table-header">
-               　　　<th class="member-list__table-header-cell">社員ID</th> <!-- 社員IDを追加 -->
-                    <th class="member-list__table-header-cell">名前</th>
-                    <th class="member-list__table-header-cell">メールアドレス</th>
-                    <th class="member-list__table-header-cell">登録日</th>
-                    <th class="member-list__table-header-cell">アクション</th>
-                </tr>
-            </thead>
-            <tbody class="member-list__table-body">
-                @foreach($members as $member)
-                    <tr class="member-list__table-row">
-                    　　<td class="member-list__table-cell">{{ $member->employee_id }}</td> <!-- 社員IDを追加 -->
-                        <td class="member-list__table-cell">{{ $member->name }}</td>
-                        <td class="member-list__table-cell">{{ $member->email }}</td>
-                        <td class="member-list__table-cell">{{ $member->created_at->format('Y-m-d') }}</td>
-                        <td class="member-list__table-cell">
-                            <a class="member-list__action-link" href="{{ route('members.show', $member->id) }}">詳細</a>
-                            <a class="member-list__action-link" href="{{ route('members.edit', $member->id) }}">編集</a>
-                            <form class="member-list__delete-form" action="{{ route('members.destroy', $member->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button class="member-list__delete-button" type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+<!-- メンバー一覧テーブル -->
+<table class="member-list__table">
+    <thead>
+        <tr class="member-list__table-header">
+            <th class="member-list__table-header-cell">社員ID</th> <!-- 社員IDを追加 -->
+            <th class="member-list__table-header-cell">名前</th> <!-- 名前列のヘッダー -->
+        </tr>
+    </thead>
+    <tbody class="member-list__table-body">
+        @foreach($members as $member)
+            <tr class="member-list__table-row">
+                <td class="member-list__table-cell">{{ $member->employee_id }}</td> <!-- 社員IDを追加 -->
+                <td class="member-list__table-cell">
+                    <!-- 名前をリンクにして勤怠表ページに遷移 -->
+                    <a href="{{ route('timesheets', ['userId' => $member->id]) }}">{{ $member->name }}</a>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
 
         <!-- ページネーションリンク -->
         <div class="member-list__pagination">

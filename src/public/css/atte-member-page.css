@@ -12,46 +12,56 @@ body {
 /* ユーザー一覧タイトル */
 .member-list__title {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
-/* 検索フォームを中央に配置 */
+
+/* 検索フォームを横並びにする */
+.search-container {
+    display: flex;
+    justify-content: center; /* 要素を中央に揃える */
+    gap: 30px; /* フォーム間のスペースを調整 */
+    flex-wrap: wrap; /* 要素が折り返せるように */
+  }
+  /* 検索フォームを中央に配置 */
 .user-list__search-form {
     display: flex;
-    justify-content: center; /* 水平中央揃え */
+    align-items: center;
     gap: 10px; /* 入力フィールドとボタンの間隔 */
-    margin-bottom: 30px;
-}
+  }
 
 /* 検索フィールド */
 .user-list__search-input {
-    padding: 15px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     background: white;
     color: black;
     font-size: 12px;
-    width: 350px; /* 幅を指定 */
+    width: 300px; /* 幅を指定 */
+    margin-bottom: 50px; /* 余白を追加 */
 }
 
 /* 検索ボタン */
 .user-list__search-button {
-    padding: 10px 20px;
+    padding: 8px 15px;
     border: none;
     border-radius: 5px;
     background: blue;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
+    margin-left: 10px; /* ボタンと入力欄の間隔を調整 */
+    margin-bottom: 50px; /* 余白を追加 */
 }
 
 /* メンバー一覧テーブル */
 .member-list__table {
     width: 100%;
-    max-width: 1300px; /* テーブルの最大幅を設定 */
+    max-width:800px; /* テーブルの最大幅を設定 */
     margin: 0 auto; /* テーブルを中央揃え */
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .member-list__table-header {

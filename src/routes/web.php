@@ -7,6 +7,7 @@ use App\Http\Controllers\StampController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TimesheetController;
 
 // メール認証ルート
 Auth::routes(['verify' => true]);  // メール認証を有効にする
@@ -39,6 +40,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// ユーザー一覧ページ
-Route::resource('members', MemberController::class)->middleware(['auth', 'verified']);
+// ユーザー一覧ページのみ
+Route::get('members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
 
+// 勤怠表ページ
+Route::get('/timesheets/{userId}', [TimesheetController::class, 'show'])->name('timesheets');

@@ -12,11 +12,12 @@ class AddEmployeeIdToMembersTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::table('members', function (Blueprint $table) {
-            $table->string('employee_id')->unique(); // 社員IDを追加
-        });
-    }
+{
+    Schema::table('members', function (Blueprint $table) {
+        // $table->string('employee_id')->unique(); // この行をコメントアウトまたは削除
+    });
+}
+
 
     /**
      * Reverse the migrations.
@@ -24,9 +25,12 @@ class AddEmployeeIdToMembersTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::table('members', function (Blueprint $table) {
+{
+    Schema::table('members', function (Blueprint $table) {
+        if (Schema::hasColumn('members', 'employee_id')) {
             $table->dropColumn('employee_id'); // 逆マイグレーション用に社員IDを削除
-        });
-    }
+        }
+    });
+}
+
 }
