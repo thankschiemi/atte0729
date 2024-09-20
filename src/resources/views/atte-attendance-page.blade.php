@@ -25,9 +25,9 @@
 
 @section('content')
 <div class="atte-form__content">
-　　　　<div class="atte-form__heading">
-　　　　    <h1>{{ $user->name }}さんの勤怠表</h1> <!-- 特定のユーザー名を表示 -->
-　　　　</div>
+    <div class="atte-form__heading">
+        <h1>{{ $user->name }}さんの勤怠表</h1> <!-- 特定のユーザー名を表示 -->
+    </div>
 
     <div class="date-list">
         <div class="date-list__navigation">
@@ -48,47 +48,42 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($employees as $employee)
-            <tr class="schedule-table__row">
-                <td class="schedule-table__cell">{{ $employee->member->name }}</td>
-                <td class="schedule-table__cell">{{ $employee->start_work }}</td>
-                <td class="schedule-table__cell">{{ $employee->end_work }}</td>
+            @foreach ($timesheets as $timesheet)
+                <tr>
+                    <td>{{ $timesheet->member->name }}</td>
+                    <td>{{ $timesheet->start_work }}</td>
+                    <td>{{ $timesheet->end_work }}</td>
 
-                {{-- 休憩時間の表示 --}}
-                <td class="schedule-table__cell">
-                    @php
-                        $totalBreakTime = 0; // 初期化
-                        foreach ($employee->breaks as $break) {
-                            if ($break->start_break && $break->end_break) {
-                                // 休憩時間を計算
-                                $totalBreakTime += \Carbon\Carbon::parse($break->end_break)
-                                    ->diffInSeconds(\Carbon\Carbon::parse($break->start_break));
+                    {{-- 休憩時間 --}}
+                    <td>
+                        @php
+                            $totalBreakTime = 0;
+                            foreach ($timesheet->breaks as $break) {
+                                if ($break->start_break && $break->end_break) {
+                                    $totalBreakTime += \Carbon\Carbon::parse($break->end_break)
+                                        ->diffInSeconds(\Carbon\Carbon::parse($break->start_break));
+                                }
                             }
-                        }
-                    @endphp
+                        @endphp
+                        {{ gmdate('H:i:s', $totalBreakTime) }}
+                    </td>
 
-                    {{-- 休憩時間を表示 --}}
-                    {{ gmdate('H:i:s', $totalBreakTime) }}
-                </td>
-
-                {{-- 勤務時間の表示（休憩時間を差し引いた勤務時間） --}}
-                <td class="schedule-table__cell">
-                    @php
-                        // 勤務時間を計算
-                        $workDuration = \Carbon\Carbon::parse($employee->end_work)
-                            ->diffInSeconds(\Carbon\Carbon::parse($employee->start_work));
-
-                        // 勤務時間から休憩時間を差し引く
-                        $netWorkDuration = $workDuration - $totalBreakTime;
-                    @endphp
-                    {{ gmdate('H:i:s', $netWorkDuration) }}
-                </td>
-            </tr>
+                    {{-- 勤務時間 --}}
+                    <td>
+                        @php
+                            $workDuration = \Carbon\Carbon::parse($timesheet->end_work)
+                                ->diffInSeconds(\Carbon\Carbon::parse($timesheet->start_work));
+                            $netWorkDuration = $workDuration - $totalBreakTime;
+                        @endphp
+                        {{ gmdate('H:i:s', $netWorkDuration) }}
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
 
     <div class="pagination">
-        {{ $employees->links('vendor.pagination.custom') }}
+        {{ $timesheets->links('vendor.pagination.custom') }}
     </div>
+</div>
 @endsection

@@ -55,7 +55,7 @@
                 <td class="member-list__table-cell">{{ $member->employee_id }}</td> <!-- 社員IDを追加 -->
                 <td class="member-list__table-cell">
                     <!-- 名前をリンクにして勤怠表ページに遷移 -->
-                    <a href="{{ route('timesheets', ['userId' => $member->id]) }}">{{ $member->name }}</a>
+                    <a href="{{ route('attendance.timesheet', ['userId' => $member->id]) }}">{{ $member->name }}</a>
                 </td>
             </tr>
         @endforeach

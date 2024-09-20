@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Date;
+use App\Models\Member; 
 use App\Models\Breakk;
 use Carbon\Carbon;
 
@@ -99,6 +100,24 @@ class AttendanceController extends Controller
         'prevDate' => $prevDate,
         'nextDate' => $nextDate
     ]);
+    }
+
+    //勤怠表
+    public function showTimesheet($userId)
+    {
+        // 現在の日付を取得
+        $currentDate = Carbon::today();
+        $prevDate = $currentDate->copy()->subDay()->toDateString();
+        $nextDate = $currentDate->copy()->addDay()->toDateString();
+    
+        // ユーザー情報を取得
+        $user = Member::findOrFail($userId);
+    
+        // 勤怠情報を取得
+        $timesheets = Date::where('member_id', $userId)->paginate(5);
+    
+        // ビューにデータを渡す
+        return view('atte-attendance-page', compact('user', 'timesheets', 'currentDate', 'prevDate', 'nextDate'));
     }
 }
 

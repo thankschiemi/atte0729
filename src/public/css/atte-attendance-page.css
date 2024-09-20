@@ -1,0 +1,187 @@
+body {
+    background-color: #eeeeee !important; /* ページ全体の背景色も同じにする */
+}
+/* メインコンテンツ */
+.main-content {
+    margin: 0 auto;
+    padding: 30px 5px;
+    width: 100%;
+    min-height: calc(100vh - 180px);
+}
+
+/* 特定のユーザー名を表 */
+.atte-form__heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+/* 検索フォームを横並びにする */
+.search-container {
+    display: flex;
+    justify-content: center; /* 要素を中央に揃える */
+    gap: 30px; /* フォーム間のスペースを調整 */
+    flex-wrap: wrap; /* 要素が折り返せるように */
+  }
+  /* 日付けのページネーション */
+.date-list__navigation {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 入力フィールドとボタンの間隔 */
+  }
+
+/* 検索フィールド */
+.user-list__search-input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: white;
+    color: black;
+    font-size: 12px;
+    width: 300px; /* 幅を指定 */
+    margin-bottom: 50px; /* 余白を追加 */
+}
+
+/* 検索ボタン */
+.user-list__search-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: blue;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px; /* ボタンと入力欄の間隔を調整 */
+    margin-bottom: 50px; /* 余白を追加 */
+}
+
+/* メンバー一覧テーブル */
+.schedule-table {
+    width: 100%;
+    max-width:800px; /* テーブルの最大幅を設定 */
+    margin: 0 auto; /* テーブルを中央揃え */
+    border-collapse: collapse;
+    margin-bottom: 60px;
+}
+
+.schedule-table__header-row {
+    text-align: center;
+    border-top: 1.7px solid #aaaaaa; /* 上部の境界線 */
+    border-bottom: 1.7px solid #aaaaaa;
+}
+
+.schedule-table__header{
+    padding: 15px 20px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.member-list__table-cell {
+    padding: 10px 20px;
+    text-align: center;
+}
+.member-list__table-cell:first-child {
+    width: 15%; /* 社員IDの幅 */
+}
+
+.member-list__table-cell:nth-child(2) {
+    width: 20%; /* 名前の幅 */
+}
+
+.member-list__table-cell:nth-child(3) {
+    width: 25%; /* メールアドレスの幅 */
+}
+
+.member-list__table-cell:nth-child(4) {
+    width: 20%; /* 登録日の幅 */
+}
+
+.member-list__table-cell:nth-child(5) {
+    width: 20%; /* アクションの幅 */
+}
+
+
+/* メンバー一覧テーブル ② */
+/* メンバー一覧テーブルのボディ */
+.member-list__table-body {
+    text-align: center; /* セルの内容を中央揃え */
+}
+
+/* メンバー一覧テーブルのセル */
+.member-list__table-cell {
+    padding: 15px 20px;
+    border-bottom: 1.7px solid #aaaaaa;
+    text-align: center;
+    word-wrap: break-word; /* 長いテキストを折り返す */
+}
+
+/* アクションリンク（詳細、編集リンクなど） */
+.member-list__action-link {
+    margin-right: 10px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.member-list__action-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* 削除ボタンのスタイル */
+.member-list__delete-form {
+    display: inline-block; /* フォームをインラインに */
+}
+
+.member-list__delete-button {
+    background-color: #dd5a9c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.member-list__delete-button:hover {
+    background-color: #c82333;
+}
+
+
+/* ページネーション */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.pagination__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination__item {
+    margin: 0 2px;
+}
+
+.pagination__link {
+    padding: 4px 12px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.pagination__item--active .pagination__link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination__link:hover {
+    background-color: #007bff;
+    color: white;
+}

@@ -44,4 +44,9 @@ Route::get('/dashboard', function () {
 Route::get('members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
 
 // 勤怠表ページ
-Route::get('/timesheets/{userId}', [TimesheetController::class, 'show'])->name('timesheets');
+
+Route::get('/timesheets/{userId}', [AttendanceController::class, 'showTimesheet'])->name('attendance.timesheet');
+
+Route::get('/timesheets', function () {
+    return redirect()->route('attendance.timesheet', ['userId' => Auth::id()]);
+})->middleware(['auth', 'verified']);
