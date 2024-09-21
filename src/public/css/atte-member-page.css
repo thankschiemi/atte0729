@@ -87,20 +87,6 @@ body {
 .member-list__table-cell:nth-child(2) {
     width: 20%; /* 名前の幅 */
 }
-
-.member-list__table-cell:nth-child(3) {
-    width: 25%; /* メールアドレスの幅 */
-}
-
-.member-list__table-cell:nth-child(4) {
-    width: 20%; /* 登録日の幅 */
-}
-
-.member-list__table-cell:nth-child(5) {
-    width: 20%; /* アクションの幅 */
-}
-
-
 /* メンバー一覧テーブル ② */
 /* メンバー一覧テーブルのボディ */
 .member-list__table-body {
@@ -114,40 +100,6 @@ body {
     text-align: center;
     word-wrap: break-word; /* 長いテキストを折り返す */
 }
-
-/* アクションリンク（詳細、編集リンクなど） */
-.member-list__action-link {
-    margin-right: 10px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.member-list__action-link:hover {
-    text-decoration: underline;
-    color: #0056b3;
-}
-
-/* 削除ボタンのスタイル */
-.member-list__delete-form {
-    display: inline-block; /* フォームをインラインに */
-}
-
-.member-list__delete-button {
-    background-color: #dd5a9c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.member-list__delete-button:hover {
-    background-color: #c82333;
-}
-
-
 /* ページネーション */
 .pagination {
     display: flex;

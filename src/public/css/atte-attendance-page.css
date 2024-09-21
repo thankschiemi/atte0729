@@ -15,45 +15,53 @@ body {
     margin-bottom: 50px;
 }
 
+/* Date List コンテナ全体 */
+.date-list {
+    text-align: center;
+    margin-bottom: 30px; /* ナビゲーション下の余白 */
+}
 
-/* 検索フォームを横並びにする */
-.search-container {
-    display: flex;
-    justify-content: center; /* 要素を中央に揃える */
-    gap: 30px; /* フォーム間のスペースを調整 */
-    flex-wrap: wrap; /* 要素が折り返せるように */
-  }
-  /* 日付けのページネーション */
+/* Date List ナビゲーション */
 .date-list__navigation {
     display: flex;
-    align-items: center;
-    gap: 10px; /* 入力フィールドとボタンの間隔 */
-  }
-
-/* 検索フィールド */
-.user-list__search-input {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: white;
-    color: black;
-    font-size: 12px;
-    width: 300px; /* 幅を指定 */
-    margin-bottom: 50px; /* 余白を追加 */
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    gap: 5px; /* 矢印ボタンと日付の間隔 */
+    margin-bottom: 30px; /* ナビゲーション下の余白 */
 }
 
-/* 検索ボタン */
-.user-list__search-button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    background: blue;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    margin-left: 10px; /* ボタンと入力欄の間隔を調整 */
-    margin-bottom: 50px; /* 余白を追加 */
+/* 日付部分のスタイル */
+.date-list__date {
+    font-size: 20px; /* 日付のフォントサイズ */
+    font-weight: bold; /* 日付を太字に */
+    color: #000; /* テキストカラーを黒に */
 }
+
+/* 矢印ボタンのスタイル */
+.date-list__nav-button {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    background-color: white; /* 背景色を白に */
+    border: 2px solid #007bff; /* 枠線を青に */
+    border-radius: 5px; /* 角を少し丸める */
+    width: 30px; /* ボタンの幅 */
+    height: 30px; /* ボタンの高さ */
+    color: #007bff; /* テキストの色（矢印）を青に */
+    font-size: 16px; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字に */
+    cursor: pointer; /* クリック時のカーソルをポインタに */
+    text-decoration: none; /* 下線を削除 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+/* ホバー時のスタイル */
+.date-list__nav-button:hover {
+    background-color: #007bff; /* 背景色を青に */
+    color: white; /* 矢印の色を白に */
+    text-decoration: none; /* ホバー時も下線を削除 */
+}
+
 
 /* メンバー一覧テーブル */
 .schedule-table {
@@ -71,83 +79,50 @@ body {
 }
 
 .schedule-table__header{
-    padding: 15px 20px;
+    padding: 20px 10px;
     white-space: nowrap;
     font-weight: bold;
 }
-
-.member-list__table-cell {
+/* 勤怠の日付と時間 */
+.timesheet-table__body {
     padding: 10px 20px;
     text-align: center;
 }
-.member-list__table-cell:first-child {
-    width: 15%; /* 社員IDの幅 */
+.timesheet-table__cell timesheet-table__cell--date {
+    width: 25%; /* 勤務日 */
 }
 
-.member-list__table-cell:nth-child(2) {
-    width: 20%; /* 名前の幅 */
+.timesheet-table__cell timesheet-table__cell--start {
+    width: 25%; /* 勤務開始の幅 */
 }
 
-.member-list__table-cell:nth-child(3) {
-    width: 25%; /* メールアドレスの幅 */
+.timesheet-table__cell timesheet-table__cell--end{
+    width: 25%; /* 勤務終了の幅 */
 }
 
-.member-list__table-cell:nth-child(4) {
-    width: 20%; /* 登録日の幅 */
+.timesheet-table__cell timesheet-table__cell--break {
+    width: 25%; /* 休憩時間の幅 */
 }
 
-.member-list__table-cell:nth-child(5) {
-    width: 20%; /* アクションの幅 */
+.timesheet-table__cell timesheet-table__cell--work-duration {
+    width: 2%; /* 勤務時間の幅 */
 }
 
 
 /* メンバー一覧テーブル ② */
 /* メンバー一覧テーブルのボディ */
-.member-list__table-body {
+.timesheet-table__body{
     text-align: center; /* セルの内容を中央揃え */
 }
 
 /* メンバー一覧テーブルのセル */
-.member-list__table-cell {
-    padding: 15px 20px;
+.timesheet-table__row {
+    height: 60px; /* 行の高さを指定 */
+    padding: 10px 0; /* 上下の余白を追加 */
     border-bottom: 1.7px solid #aaaaaa;
     text-align: center;
     word-wrap: break-word; /* 長いテキストを折り返す */
 }
-
-/* アクションリンク（詳細、編集リンクなど） */
-.member-list__action-link {
-    margin-right: 10px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.member-list__action-link:hover {
-    text-decoration: underline;
-    color: #0056b3;
-}
-
-/* 削除ボタンのスタイル */
-.member-list__delete-form {
-    display: inline-block; /* フォームをインラインに */
-}
-
-.member-list__delete-button {
-    background-color: #dd5a9c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.member-list__delete-button:hover {
-    background-color: #c82333;
-}
-
-
 /* ページネーション */
 .pagination {
     display: flex;

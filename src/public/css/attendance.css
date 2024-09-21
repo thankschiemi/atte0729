@@ -6,26 +6,39 @@ html, body {
     background-color: #eeeeee !important;
 }
 /* Date List */
-.date-list__navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* 矢印ボタンと日付の間隔 */
-    margin-bottom: 30px;
-    font-size: 20px;
+/* Date List コンテナ全体 */
+.date-list {
+    text-align: center;
+    margin-bottom: 30px; /* ナビゲーション下の余白 */
 }
 
+/* Date List ナビゲーション */
+.date-list__navigation {
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    gap: 20px; /* 矢印ボタンと日付の間隔 */
+}
+
+/* 日付部分のスタイル */
+.date-list__date {
+    font-size: 24px; /* 日付のフォントサイズ */
+    font-weight: bold; /* 日付を太字に */
+    color: #000; /* テキストカラーを黒に */
+}
+
+/* 矢印ボタンのスタイル */
 .date-list__nav-button {
     display: flex; /* フレックスボックスを使用 */
-    justify-content: center; /* 横方向に中央揃え */
-    align-items: center; /* 縦方向に中央揃え */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
     background-color: white; /* 背景色を白に */
     border: 2px solid #007bff; /* 枠線を青に */
     border-radius: 5px; /* 角を少し丸める */
-    width: 30px; /* ボタンの幅を小さくする */
-    height: 30px; /* ボタンの高さを小さくする */
+    width: 29px; /* ボタンの幅 */
+    height: 34px; /* ボタンの高さ */
     color: #007bff; /* テキストの色（矢印）を青に */
-    font-size: 14px; /* フォントサイズを調整 */
+    font-size: 16px; /* フォントサイズを調整 */
     font-weight: bold; /* 太字に */
     cursor: pointer; /* クリック時のカーソルをポインタに */
     text-decoration: none; /* 下線を削除 */
@@ -38,18 +51,7 @@ html, body {
     color: white; /* 矢印の色を白に */
     text-decoration: none; /* ホバー時も下線を削除 */
 }
-/* 矢印ボタン全体の配置 */
-.date-list__navigation {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* 矢印ボタンと日付の間隔 */
-}
 
-/* 日付部分のスタイル */
-.date-list__date {
-    font-size: 24px; /* 日付のフォントサイズ */
-    font-weight: bold; /* 日付を太字に */
-}
 
 /* Schedule Table */
 .schedule-table {

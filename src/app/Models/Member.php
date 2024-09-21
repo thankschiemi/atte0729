@@ -31,4 +31,15 @@ class Member extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Date::class, 'member_id');
     }
+    protected static function boot()
+{
+    parent::boot();
+
+    static::creating(function ($member) {
+        // 既存の最大IDに+1し、それを3桁にゼロパディングして生成
+        $lastId = Member::max('id') + 1;
+        $member->employee_id = 'EMP-' . str_pad($lastId, 3, '0', STR_PAD_LEFT);
+    });
+}
+
 }

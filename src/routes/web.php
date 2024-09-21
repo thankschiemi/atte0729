@@ -43,9 +43,10 @@ Route::get('/dashboard', function () {
 // ユーザー一覧ページのみ
 Route::get('members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
 
-// 勤怠表ページ
+// 勤怠表（年と月の指定をオプションで受け付ける）
+Route::get('/timesheets/{userId}/{yearMonth?}', [AttendanceController::class, 'showTimesheet'])
+    ->name('attendance.timesheet');
 
-Route::get('/timesheets/{userId}', [AttendanceController::class, 'showTimesheet'])->name('attendance.timesheet');
 
 Route::get('/timesheets', function () {
     return redirect()->route('attendance.timesheet', ['userId' => Auth::id()]);

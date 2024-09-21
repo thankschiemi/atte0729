@@ -63,7 +63,7 @@
                     @endphp
 
                     {{-- 休憩時間を表示 --}}
-                    {{ gmdate('H:i:s', $totalBreakTime) }}
+                    {{ gmdate('H:i', $totalBreakTime) }}
                 </td>
 
                 {{-- 勤務時間の表示（休憩時間を差し引いた勤務時間） --}}
@@ -76,7 +76,7 @@
                         // 勤務時間から休憩時間を差し引く
                         $netWorkDuration = $workDuration - $totalBreakTime;
                     @endphp
-                    {{ gmdate('H:i:s', $netWorkDuration) }}
+                    {{ gmdate('H:i', $netWorkDuration) }}
                 </td>
             </tr>
             @endforeach
