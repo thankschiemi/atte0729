@@ -54,7 +54,11 @@ body {
     margin-left: 10px; /* ボタンと入力欄の間隔を調整 */
     margin-bottom: 50px; /* 余白を追加 */
 }
-
+.alert-danger {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
 /* メンバー一覧テーブル */
 .member-list__table {
     width: 100%;

@@ -41,7 +41,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // ユーザー一覧ページのみ
-Route::get('members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
+Route::get('/members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
 
 // 勤怠表（年と月の指定をオプションで受け付ける）
 Route::get('/timesheets/{userId}/{yearMonth?}', [AttendanceController::class, 'showTimesheet'])

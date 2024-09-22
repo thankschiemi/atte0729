@@ -27,19 +27,36 @@
     <div class="member-list">
         <h2 class="member-list__title">ユーザー一覧</h2>
 
-    <div class="search-container">
-          <!-- 検索フォーム1 -->
-        <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
-           <input class="user-list__search-input" type="text" name="employee_id" placeholder="社員IDで検索" value="{{ request('employee_id') }}">
-           <button class="user-list__search-button" type="submit">検索</button>
-        </form>
-          <!-- 検索フォーム2 -->
-        <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
-           <input class="user-list__search-input" type="text" name="name" placeholder="名前で検索" value="{{ request('name') }}">
-           <button class="user-list__search-button" type="submit">検索</button>
-        </form>
-    </div>
+<div class="search-container">
+    <!-- 検索フォーム1（社員ID） -->
+    <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
+        <input class="user-list__search-input" type="text" name="employee_id" placeholder="社員IDで検索" value="{{ request('employee_id') }}">
+        <button class="user-list__search-button" type="submit">検索</button>
+        
+        <!-- 社員IDのバリデーションエラーメッセージ（検索欄の下に移動） -->
+        @if ($errors->has('employee_id'))
+            <div class="alert alert-danger">
+                {{ $errors->first('employee_id') }}
+            </div>
+        @endif
+    </form>
+
+    <!-- 検索フォーム2（名前） -->
+    <form class="user-list__search-form" action="{{ route('members.index') }}" method="GET">
+        <input class="user-list__search-input" type="text" name="name" placeholder="名前で検索" value="{{ request('name') }}">
+        <button class="user-list__search-button" type="submit">検索</button>
+        
+        <!-- 名前のバリデーションエラーメッセージ（検索欄の下に移動） -->
+        @if ($errors->has('name'))
+            <div class="alert alert-danger">
+                {{ $errors->first('name') }}
+            </div>
+        @endif
+    </form>
 </div>
+
+
+
 
 <!-- メンバー一覧テーブル -->
 <table class="member-list__table">
