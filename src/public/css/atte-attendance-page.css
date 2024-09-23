@@ -43,11 +43,11 @@ body {
     justify-content: center; /* 横方向の中央揃え */
     align-items: center; /* 縦方向の中央揃え */
     background-color: white; /* 背景色を白に */
-    border: 2px solid #007bff; /* 枠線を青に */
+    border: 2px solid blue; /* 枠線を青に */
     border-radius: 5px; /* 角を少し丸める */
     width: 30px; /* ボタンの幅 */
     height: 30px; /* ボタンの高さ */
-    color: #007bff; /* テキストの色（矢印）を青に */
+    color: blue; /* テキストの色（矢印）を青に */
     font-size: 16px; /* フォントサイズを調整 */
     font-weight: bold; /* 太字に */
     cursor: pointer; /* クリック時のカーソルをポインタに */
@@ -57,7 +57,7 @@ body {
 
 /* ホバー時のスタイル */
 .date-list__nav-button:hover {
-    background-color: #007bff; /* 背景色を青に */
+    background-color: blue; /* 背景色を青に */
     color: white; /* 矢印の色を白に */
     text-decoration: none; /* ホバー時も下線を削除 */
 }
@@ -144,19 +144,45 @@ body {
 
 .pagination__link {
     padding: 4px 12px;
-    border: 1px solid #007bff;
-    color: #007bff;
+    border: 1px solid blue;
+    color: blue;
     border-radius: 3px;
     text-decoration: none;
 }
 
 .pagination__item--active .pagination__link {
-    background-color: #007bff;
+    background-color: blue;
     color: white;
-    border-color: #007bff;
+    border-color: blue;
 }
 
 .pagination__link:hover {
-    background-color: #007bff;
+    background-color: blue;
     color: white;
+}
+/* Attendance page specific responsive adjustments */
+@media (min-width: 1440px) {
+    .date-list__nav-button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .schedule-table__header, .schedule-table__cell {
+        padding: 15px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
+    }
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
+    }
 }

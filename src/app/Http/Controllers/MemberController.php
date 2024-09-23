@@ -17,13 +17,13 @@ class MemberController extends Controller
         $query->where('name', 'like', "%{$name}%");
     }
 
-    // 社員IDの数値部分で5以上の検索
+    // 社員IDの数値部分で100以上の検索
     if ($request->has('employee_id')) {
-        $employee_id = $request->input('employee_id');
-
+        $employee_id = $request->input('employee_id', 100); // 100をデフォルト値に設定
+    
         // 社員IDが「EMP-XXX」の形式の場合、数値部分だけで比較する
         if (!empty($employee_id)) {
-            $query->whereRaw('CAST(SUBSTRING(employee_id, 5) AS UNSIGNED) >= ?', [5]);
+            $query->whereRaw('CAST(SUBSTRING(employee_id, 5) AS UNSIGNED) >= ?', [(int)$employee_id]);
         }
     }
 

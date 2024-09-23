@@ -82,7 +82,7 @@
 
         <!-- ページネーションリンク -->
         <div class="member-list__pagination">
-            {{ $members->links() }}
+            {{ $members->links('vendor.pagination.custom') }}
         </div>
     </div>
 @endsection

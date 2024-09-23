@@ -125,20 +125,46 @@ body {
 
 .pagination__link {
     padding: 4px 12px;
-    border: 1px solid #007bff;
-    color: #007bff;
+    border: 1px solid blue;
+    color: blue;
     border-radius: 3px;
     text-decoration: none;
 }
 
 .pagination__item--active .pagination__link {
-    background-color: #007bff;
+    background-color: blue;
     color: white;
-    border-color: #007bff;
+    border-color: blue;
 }
 
 .pagination__link:hover {
-    background-color: #007bff;
+    background-color: blue;
     color: white;
 }
 
+/* Attendance page specific responsive adjustments */
+@media (min-width: 1440px) {
+    .date-list__nav-button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .schedule-table__header, .schedule-table__cell {
+        padding: 15px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
+    }
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
+    }
+}
