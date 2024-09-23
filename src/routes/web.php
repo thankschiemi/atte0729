@@ -7,7 +7,7 @@ use App\Http\Controllers\StampController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\TimesheetController;
+
 
 // メール認証ルート
 Auth::routes(['verify' => true]);  // メール認証を有効にする

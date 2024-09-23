@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Date; // Dateモデルを使用するために追加
+use App\Models\Date;
+use App\Models\Member; // Member モデルを追加
 use Carbon\Carbon;
 
 class StampController extends Controller
@@ -12,7 +13,7 @@ class StampController extends Controller
     // 勤務開始
     public function startWork()
     {
-        $member = Auth::user();
+        $member = Auth::guard('web')->user(); // Memberモデルを取得
         $today = Carbon::today()->toDateString();
 
         // 今日の勤務が既に存在するか確認
@@ -33,7 +34,7 @@ class StampController extends Controller
     // 打刻ページの表示
     public function index()
     {
-        $member = Auth::user(); // ログイン中のメンバーを取得
+        $member = Auth::guard('web')->user(); // Member モデルを取得
         $lastDate = $member->dates()->latest()->first(); // 最新の勤務データを取得
         $today = Carbon::today()->toDateString(); // 今日の日付
 
@@ -66,5 +67,8 @@ class StampController extends Controller
         return view('stamp', compact('buttonsEnabled'));
     }
 }
+
+
+
 
 
