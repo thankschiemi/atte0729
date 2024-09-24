@@ -11,7 +11,16 @@
         <div class="atte-form__heading">
             <h2>ログイン</h2>
         </div>
-        <form class="form" action="/login" method="post">
+
+        <!-- エラーメッセージの表示 -->
+        @if (isset($errors) && $errors->any())
+            <div class="form__error">
+                {{ $errors->first('email') }}
+            </div>
+        @endif
+
+        <!-- ログインフォームのアクションを正しいルートに変更 -->
+        <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="form__group">
                 <div class="form__input--text">
@@ -41,4 +50,5 @@
         </form>
     </div>
 @endsection
+
 

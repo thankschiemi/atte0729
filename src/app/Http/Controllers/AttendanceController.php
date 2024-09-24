@@ -35,20 +35,24 @@ class AttendanceController extends Controller
     }
 
     public function startBreak()
-    {
-        // 休憩開始の処理
-        $member = Auth::user();
-        $date = $member->dates()->whereNull('end_work')->first();
-        if ($date) {
-            $breakk = new Breakk([
-                'date_id' => $date->id,
-                'start_break' => Carbon::now(),
-            ]);
-            $breakk->save();
-        }
+{
+    // 休憩開始の処理
+    $member = Auth::user();
+    $date = $member->dates()->whereNull('end_work')->first();
+    if ($date) {
+        $breakk = new Breakk([
+            'date_id' => $date->id,
+            'start_break' => Carbon::now(),
+        ]);
+        $breakk->save();
 
-        return redirect()->back()->with('status', '休憩開始しました！');
+    } else {
+        //Log::error('Date not found or work has already ended.');// ログをコメントアウト
     }
+
+    return redirect()->back()->with('status', '休憩開始しました！');
+}
+
 
     public function endBreak()
     {
@@ -123,6 +127,17 @@ class AttendanceController extends Controller
         
         // ビューにデータを渡す
         return view('atte-attendance-page', compact('user', 'timesheets', 'currentMonth', 'prevMonth', 'nextMonth'));
+    }
+    public function redirectToOwnTimesheet()
+    {
+        // ログインしているユーザー情報を取得
+        $user = Auth::user();
+    
+        // 現在の年月を取得
+        $yearMonth = Carbon::now()->format('Y-m');
+    
+        // ユーザーの勤怠表ページにリダイレクト
+        return redirect()->route('attendance.timesheet', ['userId' => $user->id, 'yearMonth' => $yearMonth]);
     }
     
     

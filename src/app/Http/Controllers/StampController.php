@@ -16,6 +16,8 @@ class StampController extends Controller
         $member = Auth::guard('web')->user(); // Memberモデルを取得
         $today = Carbon::today()->toDateString();
 
+        //Log::info('Start work for member: ' . $member->id);
+
         // 今日の勤務が既に存在するか確認
         $existingDate = $member->dates()->whereDate('date', $today)->first();
 
@@ -26,6 +28,7 @@ class StampController extends Controller
                 'start_work' => Carbon::now(),
             ]);
             $date->save();
+            //Log::info('Date created for member: ' . $member->id);
         }
 
         return redirect()->back()->with('status', '勤務開始しました！');
