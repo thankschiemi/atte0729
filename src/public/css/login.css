@@ -24,10 +24,11 @@ body {
 
 .form__group {
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .form__input--text input {
-    width: 100%;
+    width: 30%;
         padding: 15px;
         border: none;
         border-radius: 5px;
@@ -46,10 +47,11 @@ body {
 
 .form__button {
     margin-top: 30px;
+    text-align: center; 
 }
 
 .form__button-submit {
-    width: 100%;
+    width: 30%;
         padding: 10px;
         border: none;
         border-radius: 5px;
@@ -78,6 +80,7 @@ body {
 .form__cta {
     margin-top: 10px;
     margin-bottom: 350px;
+    text-align: center; /* 中央揃えにします */
 
 
 }

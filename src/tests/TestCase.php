@@ -8,16 +8,15 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    // setUpメソッドを追加して、CSRFトークンを無効にする
+    // setUpメソッドを追加して、CSRFトークンのチェックのみを無効にする
     protected function setUp(): void
-{
-    parent::setUp();
+    {
+        parent::setUp();
 
-    // CSRF トークンのチェックを無効化
-    $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
-
-    // すべてのミドルウェアを無効化
-    $this->withoutMiddleware();
+        // CSRF トークンのチェックを無効化
+        $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
+        
+        // セッションミドルウェアは無効にしない
+    }
 }
 
-}

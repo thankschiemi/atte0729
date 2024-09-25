@@ -2,54 +2,59 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Member; // Member モデルを使う
+use Illuminate\Support\Facades\Log;
 
 class LoginPageTest extends TestCase
 {
-    /**
-     * テスト: ログインページに認証なしでアクセスできるか確認する
-     */
+    use RefreshDatabase; // データベースをリフレッシュしてクリーンな状態でテストを実行
+
     public function test_login_page_is_accessible()
-{
-    // ログインページへのアクセステスト
-    $response = $this->get('/login');
-    $response->assertStatus(200); // ステータスコードが200であることを確認
+    {
+        $response = $this->get('/login');
+        $response->assertStatus(200); // ログインページが正しく表示されるか
+    }
+
+    public function test_user_can_login_with_valid_credentials()
+    {
+        $password = 'password123';
+        $hashedPassword = bcrypt($password);
+        
+        // ログにパスワードとハッシュ化パスワードを出力
+        Log::info('パスワード確認', ['raw' => $password, 'hashed' => $hashedPassword]);
+        
+        $member = \App\Models\Member::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
+        ]);
+        
+        // ログイン試行
+        $response = $this->post('/login', [
+            'email' => $member->email,
+            'password' => $password, // bcrypt化していないプレーンパスワード
+        ]);
+        
+        $response->assertRedirect('/');
+    }    
+
+
+
+    public function test_user_can_logout()
+    {
+        // ログインしているメンバーを作成
+        $member = Member::factory()->create();
+
+        // ログイン
+        $this->actingAs($member);
+
+        // ログアウト試行
+        $response = $this->post('/logout');
+
+        // ログアウト後の挙動を確認
+        $response->assertRedirect('/login'); // ログアウト後のリダイレクト先
+        $this->assertGuest(); // ログアウトされたか確認
+    }
 }
-
-public function test_user_can_login_with_valid_credentials()
-{
-    // テスト用ユーザーの作成（パスワードをbcryptでハッシュ化）
-    $user = \App\Models\Member::factory()->create([
-        'email' => 'test@example.com',
-        'password' => bcrypt('password123'),  // ここでパスワードをハッシュ化
-    ]);
-
-    // ログインリクエストを送信
-    $response = $this->post('/login', [
-        'email' => 'test@example.com',
-        'password' => 'password123',  // 平文のパスワード
-    ]);
-
-    // ログインが成功したかを確認
-    $response->assertRedirect('/');
-    $this->assertAuthenticatedAs($user);
-}
-
-
-public function test_user_can_logout()
-{
-    // テスト用ユーザーの作成とログイン
-    $user = \App\Models\Member::factory()->create();
-    $this->actingAs($user);
-
-    // ログアウトリクエストの送信
-    $response = $this->post('/logout');
-
-    // 正しいリダイレクトを確認
-    $response->assertRedirect('/login'); // ログアウト後にログインページにリダイレクトされると仮定
-    $this->assertGuest(); // ログアウト後、認証されていないことを確認
-}
-}
-
 

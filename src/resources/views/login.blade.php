@@ -12,12 +12,7 @@
             <h2>ログイン</h2>
         </div>
 
-        <!-- エラーメッセージの表示 -->
-        @if (isset($errors) && $errors->any())
-            <div class="form__error">
-                {{ $errors->first('email') }}
-            </div>
-        @endif
+
 
         <!-- ログインフォームのアクションを正しいルートに変更 -->
         <form action="{{ route('login') }}" method="POST">

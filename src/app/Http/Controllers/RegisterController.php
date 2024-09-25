@@ -7,6 +7,7 @@ use App\Models\Member; // Memberモデルを使用
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Auth\Events\Registered; // 追加
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -16,27 +17,26 @@ class RegisterController extends Controller
         return view('register');
     }
 
-    // 会員登録処理の実行
     public function register(RegisterRequest $request)
     {
         // バリデーションは RegisterRequest により自動的に行われる
-
+    
         // 新しいメンバーの作成
         $member = Member::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => bcrypt($request->password),
         ]);
-
-        // /login ページへリダイレクト
-        return redirect()->route('login'); // ルート名を指定
     
-            // メール確認リンクを送信
-            event(new Registered($member)); // 追加
-
-            // メール確認ページへリダイレクト
-            return redirect('/email/verify'); // ルート名を指定
-        }
+        // 新しく登録したメンバーを自動的にログインさせる
+        Auth::login($member);
+    
+        // メール確認リンクを送信
+        event(new Registered($member));
+    
+        // メール確認ページではなく、トップページにリダイレクト
+        return redirect('/'); // トップページにリダイレクト
+    }
 
 
 }

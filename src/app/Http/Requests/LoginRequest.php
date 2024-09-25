@@ -24,7 +24,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => 'required|email', // 'email' 形式のバリデーションを追加
-            'password' => 'required|min:8', // パスワードの最小文字数バリデーションを追加
+            'password' => 'required|min:6', // パスワードの最小文字数バリデーションを追加
         ];
     }
 
@@ -42,19 +42,5 @@ class LoginRequest extends FormRequest
             'password.min' => 'パスワードは8文字以上で入力してください。',
         ];
     }
-    public function login(LoginRequest $request)
-{
-    $credentials = $request->only('email', 'password');
-    $user = \App\Models\User::where('email', $request->email)->first();
-
-    if ($user && Hash::check($request->password, $user->password)) {
-        Auth::login($user);
-        return redirect()->intended('/');
-    }
-
-    return back()->withErrors([
-        'email' => '入力された資格情報が登録されていません。',
-    ])->withInput($request->only('email'));
-}
 }
 
