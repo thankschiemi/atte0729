@@ -44,6 +44,8 @@ Route::middleware(['web'])->group(function () {
 
     // ユーザー一覧ページ
     Route::get('/members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
+    Route::post('/members', [MemberController::class, 'store'])->name('members.store');
+
 
     // 勤怠表（年と月の指定をオプションで受け付ける）
     Route::get('/timesheets/{userId}/{yearMonth?}', [AttendanceController::class, 'showTimesheet'])->name('attendance.timesheet');

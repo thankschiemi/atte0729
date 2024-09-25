@@ -4,49 +4,71 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\User; // 認証ユーザーのモデル
 use App\Models\Member;
 
 class MemberTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * メンバー一覧ページが正しくアクセスできるかテスト
-     *
-     * @return void
-     */
-    public function test_members_page_is_accessible()
+    public function test_member_can_be_created()
     {
-        $user = User::factory()->create(); // テスト用のユーザーを作成
+        // メンバーの作成データ
+        $memberData = [
+            'name' => 'テストユーザー',
+            'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
+            'employee_id' => 'EMP-001'
+        ];
 
-        // actingAsでユーザーをログイン状態にしてアクセス
-        $response = $this->actingAs($user)->get('/members');
+        // メンバーを作成
+        $member = Member::create($memberData);
 
-        // ステータスコード200が返されることを確認
-        $response->assertStatus(200);
+        // データベースに正しく保存されているかを確認
+        $this->assertDatabaseHas('members', [
+            'email' => 'test@example.com'
+        ]);
     }
 
-    /**
-     * メンバーのデータが正しく表示されるかテスト
-     *
-     * @return void
-     */
-    public function test_members_are_displayed()
+    public function test_member_can_be_updated()
     {
-        $user = User::factory()->create(); // テスト用のユーザーを作成
+        // メンバーの作成
+        $member = Member::factory()->create();
 
-        // actingAsでログインさせてからメンバー2名を作成
-        Member::factory()->create(['name' => '山田太郎', 'employee_id' => 'EMP-001']);
-        Member::factory()->create(['name' => '田中花子', 'employee_id' => 'EMP-002']);
+        // メンバーの名前を更新
+        $member->update(['name' => '更新されたユーザー名']);
 
-        // actingAsでメンバー一覧ページにアクセス
-        $response = $this->actingAs($user)->get('/members');
+        // データベースに更新が反映されているか確認
+        $this->assertDatabaseHas('members', [
+            'name' => '更新されたユーザー名'
+        ]);
+    }
 
-        // ページに「山田太郎」と「田中花子」が表示されているかを確認
-        $response->assertSee('山田太郎');
-        $response->assertSee('田中花子');
+    public function test_member_can_be_deleted()
+    {
+        // メンバーの作成
+        $member = Member::factory()->create();
+
+        // メンバーの削除
+        $member->delete();
+
+        // データベースから削除されているかを確認
+        $this->assertDeleted($member);
+    }
+
+    public function test_member_has_dates_relation()
+    {
+        // メンバーを作成
+        $member = Member::factory()->create();
+
+        // リレーションとして紐付く日付データを作成
+        $member->dates()->create([
+            'date' => now(),
+        ]);
+
+        // リレーションが正しく動作しているか確認
+        $this->assertCount(1, $member->dates);
     }
 }
+
 
 

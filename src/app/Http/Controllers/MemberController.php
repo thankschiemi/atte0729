@@ -32,6 +32,19 @@ class MemberController extends Controller
 
     return view('members.atte-member-page', compact('members'));
 }
+public function store(MemberRequest $request)
+{
+    $validatedData = $request->validated();
+    $validatedData['password'] = bcrypt($request->password);
+
+    // メンバーを作成し、結果を返す
+    $member = Member::create($validatedData);
+
+    // 作成されたメンバー情報をデバッグ出力
+     // dd($member->toArray());
+
+    return response()->json(['message' => 'Member created successfully'], 201);
+}
 
 }
 

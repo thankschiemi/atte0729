@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -13,10 +14,12 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // CSRF トークンのチェックを無効化
+        // ファサードのインスタンスをクリアして再初期化
+        \Illuminate\Support\Facades\Facade::clearResolvedInstances();
+
+        // CSRFトークンのチェックを無効にする（必要に応じて）
         $this->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
-        
-        // セッションミドルウェアは無効にしない
     }
 }
+
 
