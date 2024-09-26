@@ -5,8 +5,6 @@ namespace Database\Factories;
 use App\Models\Member;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Faker\Generator as Faker;
-use Faker\Factory as FakerFactory;
 
 class MemberFactory extends Factory
 {
@@ -14,12 +12,17 @@ class MemberFactory extends Factory
 
     public function definition()
     {
-        $faker = FakerFactory::create('ja_JP');
         return [
-            'name' => $faker->name, // Fakerの'name'フォーマットを使用
+            'name' => $this->faker->name,
+            'employee_id' => 'EMP-' . $this->faker->unique()->numberBetween(100, 999),
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => Hash::make('password123'), // デフォルトのパスワードを設定
         ];
     }
 }
+
+
+
 
 
 

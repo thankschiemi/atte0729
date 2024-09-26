@@ -7,7 +7,7 @@ use App\Models\Member;
 
 class MemberController extends Controller
 {
-    public function index(MemberRequest $request) // MemberRequest を受け取る
+    public function index(\Illuminate\Http\Request $request) 
 {
     $query = Member::query();
 
@@ -30,8 +30,16 @@ class MemberController extends Controller
     // ページネーション
     $members = $query->paginate(5);
 
+    // リクエストがJSONを期待している場合、JSONを返す
+    if ($request->wantsJson()) {
+        return response()->json($members);
+    }
+
+    // それ以外の場合はHTMLビューを返す
     return view('members.atte-member-page', compact('members'));
 }
+
+
 public function store(MemberRequest $request)
 {
     $validatedData = $request->validated();

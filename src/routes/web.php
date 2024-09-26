@@ -44,6 +44,9 @@ Route::middleware(['web'])->group(function () {
 
     // ユーザー一覧ページ
     Route::get('/members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
+
+  
+
     Route::post('/members', [MemberController::class, 'store'])->name('members.store');
 
 
@@ -52,9 +55,9 @@ Route::middleware(['web'])->group(function () {
 
     // 自分の勤怠表にリダイレクトするルート
     Route::get('/timesheets', function () {
-        // 現在の年月を取得
+        //現在の年月を取得
         $yearMonth = Carbon::now()->format('Y-m');
-        // リダイレクト時に userId と yearMonth を含める
+        //リダイレクト時に userId と yearMonth を含める
         return redirect()->route('attendance.timesheet', ['userId' => Auth::id(), 'yearMonth' => $yearMonth]);
     })->middleware(['auth', 'verified']);
 });
