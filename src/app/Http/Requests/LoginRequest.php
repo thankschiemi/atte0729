@@ -2,6 +2,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class LoginRequest extends FormRequest
 {
@@ -22,9 +23,10 @@ class LoginRequest extends FormRequest
      */
     public function rules()
     {
+        //Log::info('バリデーションが実行されました');
         return [
             'email' => 'required|email', // 'email' 形式のバリデーションを追加
-            'password' => 'required|min:6', // パスワードの最小文字数バリデーションを追加
+            'password' => 'required|min:8', // パスワードの最小文字数バリデーションを追加
         ];
     }
 
@@ -43,4 +45,5 @@ class LoginRequest extends FormRequest
         ];
     }
 }
+
 

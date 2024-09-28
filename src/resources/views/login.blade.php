@@ -15,7 +15,7 @@
 
 
         <!-- ログインフォームのアクションを正しいルートに変更 -->
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('login') }}" method="POST" novalidate>
             @csrf
             <div class="form__group">
                 <div class="form__input--text">

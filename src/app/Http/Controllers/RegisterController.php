@@ -19,6 +19,7 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        //dd('RegisterRequest発動');
         // バリデーションは RegisterRequest により自動的に行われる
     
         // 新しいメンバーの作成
