@@ -17,8 +17,11 @@ class StampPageTest extends TestCase
      */
     public function test_authenticated_user_can_access_stamp_page()
     {
-        // Memberモデルのテストユーザーを作成してログイン
-        $member = Member::factory()->create(); // Member モデルのファクトリーを使用
+        // 認証済みのテストユーザーを作成
+        $member = Member::factory()->create([
+        'email_verified_at' => now(), // メール認証済みとする
+    ]);
+
         $this->actingAs($member) // 作成したユーザーで認証
             ->get('/') // 打刻ページにアクセス
             ->assertStatus(200); // ステータスコード200が返されることを確認

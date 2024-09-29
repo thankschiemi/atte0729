@@ -15,22 +15,30 @@ class LoginController extends Controller
     }
 
     public function login(LoginRequest $request)
-    {
-           $credentials = $request->only('email', 'password');
-        
-        // Auth::attempt の結果をログに出力 (コメントアウト済み)
-        $result = Auth::attempt($credentials);
-        // Log::info('Auth attempt result', ['result' => $result, 'email' => $credentials['email']]);
+{
+    $credentials = $request->only('email', 'password');
 
-        if ($result) { // ログイン成功時の処理
-            // Log::info('ログイン成功', ['email' => $credentials['email']]);
-            return redirect()->intended('/'); // デフォルトの遷移先（メインページなど）
-        } else {
-            // ログイン失敗時の処理
-            // Log::error('ログイン失敗', ['email' => $credentials['email'], 'reason' => '認証に失敗しました。']);
-            return redirect()->back()->withErrors(['email' => '認証情報が正しくありません']);
-        }
+    // ユーザーが存在するか確認
+    $user = \App\Models\Member::where('email', $credentials['email'])->first();
+
+    if (!$user) {
+        // ユーザーが見つからない場合
+        return redirect()->back()->withErrors(['email' => 'ユーザーが見つかりません']);
     }
+
+    // パスワードが一致しない場合
+    if (!\Hash::check($credentials['password'], $user->password)) {
+        return redirect()->back()->withErrors(['password' => 'パスワードが正しくありません']);
+    }
+
+    // ログイン成功
+    if (Auth::attempt($credentials)) {
+        return redirect()->intended('/');
+    } else {
+        return redirect()->back()->withErrors(['email' => 'ログインに失敗しました']);
+    }
+}
+
     
     public function logout(Request $request)
     {
@@ -40,7 +48,3 @@ class LoginController extends Controller
         return redirect('/login'); // ログアウト後、ログインページにリダイレクト
     }
 }
-
-
-
-

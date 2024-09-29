@@ -8,6 +8,7 @@ use App\Models\Date;
 use App\Models\Member; // Member モデルを追加
 use Carbon\Carbon;
 
+
 class StampController extends Controller
 {
     // 勤務開始

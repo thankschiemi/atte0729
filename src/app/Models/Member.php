@@ -31,24 +31,24 @@ class Member extends Authenticatable implements MustVerifyEmail
     // dates リレーションを定義
     public function dates()
     {
-        return $this->hasMany(Date::class, 'member_id');
+        return $this->hasMany(WorkDate::class, 'member_id'); // Date::class を WorkDate::class に変更
     }
 
     // 社員IDを数字で自動生成する処理
     protected static function boot()
-{
-    parent::boot();
+    {
+        parent::boot();
 
-    static::creating(function ($member) {
-        $lastEmployeeId = Member::whereNotNull('employee_id')
-            ->orderByRaw('CAST(SUBSTRING(employee_id, 5) AS UNSIGNED) DESC')
-            ->value('employee_id');
+        static::creating(function ($member) {
+            $lastEmployeeId = Member::whereNotNull('employee_id')
+                ->orderByRaw('CAST(SUBSTRING(employee_id, 5) AS UNSIGNED) DESC')
+                ->value('employee_id');
 
-        $lastNumber = $lastEmployeeId ? (int) substr($lastEmployeeId, 4) : 0;
-        $newEmployeeId = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $lastNumber = $lastEmployeeId ? (int) substr($lastEmployeeId, 4) : 0;
+            $newEmployeeId = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
 
-        $member->employee_id = 'EMP-' . $newEmployeeId;
-    });
+            $member->employee_id = 'EMP-' . $newEmployeeId;
+        });
+    }
 }
 
-}

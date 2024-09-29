@@ -40,6 +40,9 @@
             <div class="form__group">
                 <div class="form__input--text">
                     <input type="password" name="password_confirmation" placeholder="パスワード（確認用）" required />
+                    @error('password_confirmation')
+                    <div class="form__error">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="form__button">

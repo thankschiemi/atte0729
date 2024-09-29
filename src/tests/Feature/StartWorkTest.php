@@ -15,8 +15,13 @@ class StartWorkTest extends TestCase
     public function test_authenticated_user_can_start_work()
 {
     // 認証されたユーザーを作成
-    $member = Member::factory()->create();
+    $member = Member::factory()->create([
+        'email_verified_at' => now(),
+    ]);
 
+    // 勤務開始のためのリクエストを送信
+    $this->actingAs($member)->post('/start-work');
+    
     // セッションを開始
     session()->start();
 

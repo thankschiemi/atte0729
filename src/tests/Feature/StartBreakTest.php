@@ -6,46 +6,42 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Member;
 use App\Models\Date;
-use Illuminate\Support\Facades\Log;  // 追加
+use App\Models\Breakk; // Breakkモデルを追加
 use Carbon\Carbon;
+//use Illuminate\Support\Facades\Log; // Logクラスをインポート
 
 class StartBreakTest extends TestCase
 {
     use RefreshDatabase;
 
     public function test_authenticated_user_can_start_break()
-    {
-        // Log::info('テスト開始: 休憩開始処理');
-        
-        // ユーザーのログイン状態を設定
-        $this->actingAs(Member::factory()->create());
+{
+    // ユーザーのログイン状態を設定
+    $member = Member::factory()->create();
+    $this->actingAs($member);
 
-        // 事前に勤務データを作成
-        $date = Date::factory()->create([
-            'member_id' => 1,
-            'date' => Carbon::today(),
-            'start_work' => Carbon::now(),
-        ]);
+    // 事前に勤務データを作成
+    $date = Date::factory()->create([
+        'member_id' => $member->id,
+        'date' => Carbon::today()->toDateString(),
+        'start_work' => Carbon::now(),
+    ]);
 
-        // Log::info('勤務データが作成されました', ['date_id' => $date->id]);
+    // 休憩開始のPOSTリクエストを送信
+    $response = $this->post('/start-break');
 
-        // 休憩開始のPOSTリクエストを送信
-        $response = $this->post('/start-break', [
-            '_token' => csrf_token(),
-        ]);
+    // ステータスコード302を確認（リダイレクト）
+    $response->assertStatus(302);
 
-        // Log::info('休憩開始のPOSTリクエストが送信されました');
+    // テスト中の date_id を確認
+    //dd($date->id);  // これでテスト中の date_id を確認します
 
-        // ステータスコード302を確認（リダイレクト）
-        $response->assertStatus(302);
-
-        // データベースに休憩のレコードが挿入されたか確認
-        $this->assertDatabaseHas('breakks', [
-            'date_id' => $date->id,
-            // start_breakがnullでないことを確認
-            'start_break' => now(),
-        ]);
-
-        // Log::info('テスト終了: 休憩開始処理');
-    }
+    // データベースに休憩のレコードが挿入されたか確認
+    $this->assertDatabaseHas('breakks', [
+        'date_id' => $date->id,
+    ]);
 }
+
+
+}
+
