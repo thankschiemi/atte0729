@@ -2,15 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Date extends Model
+class WorkDate extends Model
 {
+    use HasFactory;
+
+    protected $table = 'dates'; // テーブル名を明示的に設定
+
     protected $fillable = [
         'member_id',
         'date',
         'start_work',
-        'end_work'
+        'end_work',
+    ];
+
+    protected $casts = [
+        'start_work' => 'datetime',
+        'end_work' => 'datetime',
     ];
 
     public function member()
@@ -18,15 +28,14 @@ class Date extends Model
         return $this->belongsTo(Member::class);
     }
 
-    // Breakkモデルとのリレーションを定義
     public function breaks()
     {
         return $this->hasMany(Breakk::class, 'date_id');
     }
-
-    protected $table = 'dates';
-
-
 }
+
+
+
+
 
 

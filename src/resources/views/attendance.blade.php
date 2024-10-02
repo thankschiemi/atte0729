@@ -1,78 +1,89 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.atte_layout')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Atte - ログイン</title>
-    <link rel="stylesheet" href="css/sanitize.css" />
-    <link rel="stylesheet" href="css/attendance.css" />
-</head>
+@section('title', 'Atte - 勤務時間一覧')
 
-<body>
-    <header class="header">
-        <h1 class="header__title">
-            <a href="/" class="header__logo">
-                Atte</a>
-        </h1>
-        <nav class="header-nav">
-            <ul class="header-nav-list">
-                <li class="header-nav-item"><a href="{{ url('/') }}">ホーム</a></li>
-                <li class="header-nav-item"><a href="{{ url('/attendance') }}">日付一覧</a></li>
-                <li class="header-nav-item">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ログアウト
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/attendance.css') }}" />
+@endsection
 
-    <main class="main-content">
-        <div class="date-list">
-            <div class="date-list__navigation">
-                <button class="date-list__nav-button">＜</button>
-                <span class="date-list__date">2021-11-01</span>
-                <button class="date-list__nav-button">＞</button>
-            </div>
-            <table class="schedule-table">
-                <thead>
-                    <tr class="schedule-table__header-row">
-                        <th class="schedule-table__header">名前</th>
-                        <th class="schedule-table__header">勤務開始</th>
-                        <th class="schedule-table__header">勤務終了</th>
-                        <th class="schedule-table__header">休憩時間</th>
-                        <th class="schedule-table__header">勤務時間</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($employees as $employee)
-                    <tr class="schedule-table__row">
-                        <td class="schedule-table__cell">{{ $employee['member']['name'] }}</td>
-                        <td class="schedule-table__cell">{{ $employee['start_work'] }}</td>
-                        <td class="schedule-table__cell">{{ $employee['end_work'] }}</td>
-                        <td class="schedule-table__cell">00:00:00</td> <!-- 休憩時間（仮の値） -->
-                        <td class="schedule-table__cell">{{ \Carbon\Carbon::parse($employee['end_work'])->diff(\Carbon\Carbon::parse($employee['start_work']))->format('%H:%I:%S') }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+@section('header-nav')
+    <nav class="header-nav">
+        <ul class="header-nav-list">
+            <li class="header-nav-item"><a href="{{ url('/') }}">ホーム</a></li>
+            <li class="header-nav-item"><a href="{{ url('/attendance') }}">日付一覧</a></li>
+            <li class="header-nav-item"><a href="{{ url('/members') }}">ユーザー一覧</a></li>
+            <li class="header-nav-item"><a href="{{ url('/timesheets') }}">勤怠表</a></li>
+            <li class="header-nav-item">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="logout-button">ログアウト</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+@endsection
+
+@section('content')
+    <div class="date-list">
+        <div class="date-list__navigation">
+            <a href="{{ route('attendance.date', ['date' => $prevDate]) }}" class="date-list__nav-button"><</a>
+            <span class="date-list__date">{{ $currentDate }}</span>
+            <a href="{{ route('attendance.date', ['date' => $nextDate]) }}" class="date-list__nav-button">></a>
         </div>
-        <div class="pagination">
-            {{ $employees->links('vendor.pagination.custom') }}
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="footer__inner">
-            <small class="footer__logo">
-                Atte, inc.
-            </small>
-        </div>
-    </footer>
-</body>
+    </div>
 
-</html>
+    <table class="schedule-table">
+        <thead>
+            <tr class="schedule-table__header-row">
+                <th class="schedule-table__header">名前</th>
+                <th class="schedule-table__header">勤務開始</th>
+                <th class="schedule-table__header">勤務終了</th>
+                <th class="schedule-table__header">休憩時間</th>
+                <th class="schedule-table__header">勤務時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($employees as $employee)
+            <tr class="schedule-table__row">
+                <td class="schedule-table__cell">{{ $employee->member->name }}</td>
+                <td class="schedule-table__cell">{{ $employee->start_work }}</td>
+                <td class="schedule-table__cell">{{ $employee->end_work }}</td>
+
+                {{-- 休憩時間の表示 --}}
+                <td class="schedule-table__cell">
+                    @php
+                        $totalBreakTime = 0; // 初期化
+                        foreach ($employee->breaks as $break) {
+                            if ($break->start_break && $break->end_break) {
+                                // 休憩時間を計算
+                                $totalBreakTime += \Carbon\Carbon::parse($break->end_break)
+                                    ->diffInSeconds(\Carbon\Carbon::parse($break->start_break));
+                            }
+                        }
+                    @endphp
+
+                    {{-- 休憩時間を表示 --}}
+                    {{ gmdate('H:i', $totalBreakTime) }}
+                </td>
+
+                {{-- 勤務時間の表示（休憩時間を差し引いた勤務時間） --}}
+                <td class="schedule-table__cell">
+                    @php
+                        // 勤務時間を計算
+                        $workDuration = \Carbon\Carbon::parse($employee->end_work)
+                            ->diffInSeconds(\Carbon\Carbon::parse($employee->start_work));
+
+                        // 勤務時間から休憩時間を差し引く
+                        $netWorkDuration = $workDuration - $totalBreakTime;
+                    @endphp
+                    {{ gmdate('H:i', $netWorkDuration) }}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        {{ $employees->links('vendor.pagination.custom') }}
+    </div>
+@endsection

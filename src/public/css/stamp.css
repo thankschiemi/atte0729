@@ -1,31 +1,13 @@
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    padding: 0 50px;
-    background-color: white;
-    color: black;
+body {
+    background-color: #eeeeee !important; /* ページ全体の背景色も同じにする */
 }
 
-.header-ttl {
-    font-size: 30px;
-}
-
-.header-nav-list {
-    display: flex;
-}
-
-.header-nav-item {
-    margin-right: 50px;
-    font-weight: bold;
-}
-
+/* フォームのスタイル */
 .atte-form__content {
     margin: 0 auto;
     padding: 80px 20px;
     width: 100%;
-    background: #eeeeee;
+    background-color: #eeeeee !important;
     min-height: calc(100vh - 80px - 50px);
 }
 
@@ -34,33 +16,22 @@
     text-align: center;
     font-size: 20px;
 }
-@media (max-width: 600px) {
-    .form__button {
-        grid-template-columns: 1fr;
-        /* 1列に変更 */
-    }
-}
+
+/* ボタンレイアウト */
 .form__button {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* 2列のレイアウト */
-        gap: 40px;
-        /* ボタンの間隔 */
-        justify-items: stretch;
-        /* ボタンを横幅いっぱいに広げる */
-        width: 100%;
-        max-width: 800px;
-        /* 親要素の最大幅を800pxに設定 */
-        margin: 0 auto;
-        /* 画面中央に配置 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2列のレイアウト */
+    gap: 40px; /* ボタンの間隔 */
+    justify-items: stretch; /* ボタンを横幅いっぱいに広げる */
+    width: 100%;
+    max-width: 800px; /* 親要素の最大幅を800pxに設定 */
+    margin: 0 auto; /* 画面中央に配置 */
 }
 
 .form__button-submit {
     padding: 20px;
-    width: 100%;
-    /* ボタンの幅を100%に */
-    height: 150px;
-    /* ボタンの高さを150pxに */
+    width: 100%; /* ボタンの幅を100%に */
+    height: 150px; /* ボタンの高さを150pxに */
     border: none;
     border-radius: 5px;
     background: white;
@@ -70,41 +41,47 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* ボタン内のテキストを中央に配置 */
-    text-align: center;
-    /* テキストを中央揃えに */
+    align-items: center; /* ボタン内のテキストを中央に配置 */
+    text-align: center; /* テキストを中央揃えに */
 }
 
-button.disabled {
-    opacity: 0.6;
-    /* 透明度を60%に設定 */
-    color: #333;
-    /* 文字色を濃くする */
+button:disabled {
     background-color: #ddd;
-    /* 背景色をグレーに設定 */
+    color: #999;
+    cursor: not-allowed;
+}
+.form__button-submit.disabled {
+    opacity: 0.6; /* 無効化されたボタンを半透明に */
+    cursor: not-allowed; /* カーソルを無効状態に */
 }
 
-.footer {
-    background: white;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    margin: 0;
-    box-sizing: border-box;
-    height: 50px;
-    /* フッターの高さを明示的に設定 */
+.form__button-submit:disabled {
+    opacity: 0.6; /* 無効化されたボタンを半透明に */
+    cursor: not-allowed; /* カーソルを無効状態に */
+    background-color: #ddd; /* 背景色を灰色に */
 }
-
-.footer__inner {
-    text-align: center;
+/* 出席ページ固有のレスポンシブ調整 */
+@media (min-width: 1440px) {
+    .date-list__nav-button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .schedule-table__header, .schedule-table__cell {
+        padding: 15px 40px;
+    }
 }
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
+    }
 
-.footer__logo {
-    color: black;
-    font-weight: bold;
-    font-size: 15px;
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
+    }
 }
