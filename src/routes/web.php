@@ -8,22 +8,10 @@ use App\Http\Controllers\StampController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MemberController;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 use App\Http\Controllers\FileUploadController;
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 
-// web ミドルウェアを適用したルートグループ
-Route::middleware(['web'])->group(function () {
+    //ミドルウェアを適用したルートグループ
+    Route::middleware(['web'])->group(function () {
     Auth::routes(['verify' => true]);  // メール認証を有効にする
 
     // 会員登録ページ
@@ -58,7 +46,7 @@ Route::middleware(['web'])->group(function () {
     // ユーザー一覧ページ
     Route::get('/members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
 
-  
+
 
     Route::post('/members', [MemberController::class, 'store'])->name('members.store');
 
@@ -75,33 +63,6 @@ Route::middleware(['web'])->group(function () {
     })->middleware(['auth', 'verified']);
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-Route::post('/upload', [FileUploadController::class, 'upload']);
-=======
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
-=======
->>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
