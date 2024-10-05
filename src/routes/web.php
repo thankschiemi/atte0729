@@ -8,7 +8,10 @@ use App\Http\Controllers\StampController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MemberController;
+<<<<<<< HEAD
 use App\Http\Controllers\FileUploadController;
+=======
+>>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 
 // web ミドルウェアを適用したルートグループ
 Route::middleware(['web'])->group(function () {
@@ -63,4 +66,15 @@ Route::middleware(['web'])->group(function () {
     })->middleware(['auth', 'verified']);
 });
 
+<<<<<<< HEAD
 Route::post('/upload', [FileUploadController::class, 'upload']);
+=======
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+>>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
