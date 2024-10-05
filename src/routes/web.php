@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MemberController;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 use App\Http\Controllers\FileUploadController;
+=======
+>>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 =======
 >>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 =======
@@ -71,8 +74,11 @@ Route::middleware(['web'])->group(function () {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::post('/upload', [FileUploadController::class, 'upload']);
 =======
+=======
+>>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 =======
 >>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 
@@ -84,6 +90,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
+=======
 >>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
 =======
 >>>>>>> e8d0bf6debbee7ba0aa5fca3bca54987780d9922
