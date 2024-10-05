@@ -45,7 +45,7 @@ Route::middleware(['web'])->group(function () {
     // ユーザー一覧ページ
     Route::get('/members', [MemberController::class, 'index'])->name('members.index')->middleware(['auth', 'verified']);
 
-  
+
 
     Route::post('/members', [MemberController::class, 'store'])->name('members.store');
 
@@ -63,10 +63,7 @@ Route::middleware(['web'])->group(function () {
 });
 
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
