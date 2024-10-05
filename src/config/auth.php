@@ -36,11 +36,18 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'members',
     ],
+
+    // カスタムガード 'member' の定義
+    'member' => [
+        'driver' => 'session',
+        'provider' => 'members',
+    ],
+],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +67,7 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'members' => [
             'driver' => 'eloquent',
             'model' => App\Models\Member::class,
         ],

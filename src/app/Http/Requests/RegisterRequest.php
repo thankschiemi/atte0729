@@ -27,6 +27,8 @@ class RegisterRequest extends FormRequest
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:members', 
                 'password' => 'required|string|min:8|confirmed',
+                'password_confirmation' => 'required',
+
 
         ];
     }
@@ -35,10 +37,13 @@ class RegisterRequest extends FormRequest
     return [
         'name.required' => '名前を入力してください。',
         'email.required' => 'メールアドレスを入力してください。',
+        'email.email' => '有効なメールアドレスを入力してください。',
         'email.unique' => 'このメールアドレスはすでに登録されています。',
         'password.required' => 'パスワードを入力してください。',
         'password.min' => 'パスワードは8文字以上で入力してください。',
         'password.confirmed' => 'パスワード確認が一致しません。',
+        'password.confirmed' => 'パスワードと確認用パスワードが一致しません。',
+        'password_confirmation.required' => '確認用パスワードを入力してください。',
     ];
 }
 }

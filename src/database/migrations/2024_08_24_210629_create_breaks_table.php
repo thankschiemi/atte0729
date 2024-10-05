@@ -13,16 +13,16 @@ class CreateBreaksTable extends Migration
      */
     public function up()
     {
-        Schema::create('breaks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('date_id');
-            $table->dateTime('start_break')->nullable();
-            $table->dateTime('end_break')->nullable();
+         Schema::create('breaks', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('member_id'); // member_idカラムの追加
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade'); // 外部キー制約
+            $table->timestamp('start_break')->nullable();
+            $table->timestamp('end_break')->nullable();
             $table->timestamps();
-
-            $table->foreign('date_id')->references('id')->on('dates')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "doctrine/dbal": "^4.1",
+        "laravel/framework": "^11.26"
+    }
+}

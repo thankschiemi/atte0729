@@ -13,7 +13,7 @@ class DropBreaksTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('breaks');
+        // Schema::dropIfExists('breaks');  // この行をコメントアウト
     }
 
     /**
@@ -23,15 +23,10 @@ class DropBreaksTable extends Migration
      */
     public function down()
     {
-        // 必要に応じて、downメソッドにテーブルを再作成するコードを記述することも可能です
-        Schema::create('breaks', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('date_id');
-            $table->dateTime('start_break')->nullable();
-            $table->dateTime('end_break')->nullable();
-            $table->timestamps();
-
-            $table->foreign('date_id')->references('id')->on('dates')->onDelete('cascade');
-        });
+        // Schema::create('breaks', function (Blueprint $table) {
+        //    $table->id();
+        //    // その他のカラム定義
+        // });
     }
 }
+

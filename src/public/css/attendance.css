@@ -1,60 +1,57 @@
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    padding: 0 50px;
-    background-color: white;
-    color: black;
+html, body {
+    height: 100%;
+    background-color: #eeeeee !important;
 }
-
-.header-ttl {
-    font-size: 30px;
-}
-
-.header-nav-list {
-    display: flex;
-}
-
-.header-nav-item {
-    margin-right: 50px;
-    font-weight: bold;
-}
-
-/* Main Content */
 .main-content {
-    margin: 0 auto;
-    padding: 30px 5px;
-    width: 100%;
-    background: #eeeeee;
-    min-height: calc(100vh - 180px);
+    background-color: #eeeeee !important;
 }
-
 /* Date List */
-.date-list__navigation {
-    margin-bottom: 30px;
+/* Date List コンテナ全体 */
+.date-list {
     text-align: center;
-    font-size: 20px;
+    margin-bottom: 30px; /* ナビゲーション下の余白 */
 }
 
-.date-list__nav-button {
-    background-color: white;
-    border: 1px solid blue;
-    border-radius: 5px;
-    color: blue;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 16px;
+/* Date List ナビゲーション */
+.date-list__navigation {
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    gap: 20px; /* 矢印ボタンと日付の間隔 */
 }
 
-.date-list__nav-button:hover {
-    background-color: #e0e0e0;
-}
-
+/* 日付部分のスタイル */
 .date-list__date {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 20px; /* 日付のフォントサイズ */
+    font-weight: bold; /* 日付を太字に */
+    color: #000; /* テキストカラーを黒に */
 }
+
+/* 矢印ボタンのスタイル */
+.date-list__nav-button {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    background-color: white; /* 背景色を白に */
+    border: 2px solid blue; /* 枠線を青に */
+    border-radius: 5px; /* 角を少し丸める */
+    width: 29px; /* ボタンの幅 */
+    height: 34px; /* ボタンの高さ */
+    color: blue; /* テキストの色（矢印）を青に */
+    font-size: 14px; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字に */
+    cursor: pointer; /* クリック時のカーソルをポインタに */
+    text-decoration: none; /* 下線を削除 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+/* ホバー時のスタイル */
+.date-list__nav-button:hover {
+    background-color: blue; /* 背景色を青に */
+    color: white; /* 矢印の色を白に */
+    text-decoration: none; /* ホバー時も下線を削除 */
+}
+
 
 /* Schedule Table */
 .schedule-table {
@@ -77,6 +74,7 @@
     padding: 10px 20px;
     white-space: nowrap;
 }
+/* メンバー一覧テーブル ② */
 .schedule-table__row {
     display: flex;
     text-align: left;
@@ -134,24 +132,42 @@
     cursor: default;
 }
 
-/* Footer */
-.footer {
-    background: white;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-top: auto;
+/* ページネーション */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-top: 10px;
 }
 
-.footer__inner {
-    text-align: center;
+.pagination__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.footer__logo {
-    color: black;
-    font-weight: bold;
-    font-size: 15px;
+.pagination__item {
+    margin: 0 2px;
+}
+
+.pagination__link {
+    padding: 4px 12px;
+    border: 1px solid blue;
+    color: blue;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.pagination__item--active .pagination__link {
+    background-color: blue;
+    color: white;
+    border-color: blue;
+}
+
+.pagination__link:hover {
+    background-color: blue;
+    color: white;
 }
 /* Attendance page specific responsive adjustments */
 @media (min-width: 1440px) {
@@ -165,11 +181,17 @@
 }
 
 @media (max-width: 600px) {
-    .date-list__nav-button {
-        padding: 5px 10px;
-        font-size: 14px;
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
     }
-    .schedule-table__header, .schedule-table__cell {
-        padding: 10px 10px;
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
     }
 }

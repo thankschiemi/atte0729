@@ -1,0 +1,188 @@
+body {
+    background-color: #eeeeee !important; /* ページ全体の背景色も同じにする */
+}
+/* メインコンテンツ */
+.main-content {
+    margin: 0 auto;
+    padding: 30px 5px;
+    width: 100%;
+    min-height: calc(100vh - 180px);
+}
+
+/* 特定のユーザー名を表 */
+.atte-form__heading {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* Date List コンテナ全体 */
+.date-list {
+    text-align: center;
+    margin-bottom: 30px; /* ナビゲーション下の余白 */
+}
+
+/* Date List ナビゲーション */
+.date-list__navigation {
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    gap: 5px; /* 矢印ボタンと日付の間隔 */
+    margin-bottom: 30px; /* ナビゲーション下の余白 */
+}
+
+/* 日付部分のスタイル */
+.date-list__date {
+    font-size: 20px; /* 日付のフォントサイズ */
+    font-weight: bold; /* 日付を太字に */
+    color: #000; /* テキストカラーを黒に */
+}
+
+/* 矢印ボタンのスタイル */
+.date-list__nav-button {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 横方向の中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    background-color: white; /* 背景色を白に */
+    border: 2px solid blue; /* 枠線を青に */
+    border-radius: 5px; /* 角を少し丸める */
+    width: 30px; /* ボタンの幅 */
+    height: 30px; /* ボタンの高さ */
+    color: blue; /* テキストの色（矢印）を青に */
+    font-size: 16px; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字に */
+    cursor: pointer; /* クリック時のカーソルをポインタに */
+    text-decoration: none; /* 下線を削除 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+/* ホバー時のスタイル */
+.date-list__nav-button:hover {
+    background-color: blue; /* 背景色を青に */
+    color: white; /* 矢印の色を白に */
+    text-decoration: none; /* ホバー時も下線を削除 */
+}
+
+
+/* メンバー一覧テーブル */
+.schedule-table {
+    width: 100%;
+    max-width:800px; /* テーブルの最大幅を設定 */
+    margin: 0 auto; /* テーブルを中央揃え */
+    border-collapse: collapse;
+    margin-bottom: 60px;
+}
+
+.schedule-table__header-row {
+    text-align: center;
+    border-top: 1.7px solid #aaaaaa; /* 上部の境界線 */
+    border-bottom: 1.7px solid #aaaaaa;
+}
+
+.schedule-table__header{
+    padding: 20px 10px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+/* 勤怠の日付と時間 */
+.timesheet-table__body {
+    padding: 10px 20px;
+    text-align: center;
+}
+.timesheet-table__cell timesheet-table__cell--date {
+    width: 25%; /* 勤務日 */
+}
+
+.timesheet-table__cell timesheet-table__cell--start {
+    width: 25%; /* 勤務開始の幅 */
+}
+
+.timesheet-table__cell timesheet-table__cell--end{
+    width: 25%; /* 勤務終了の幅 */
+}
+
+.timesheet-table__cell timesheet-table__cell--break {
+    width: 25%; /* 休憩時間の幅 */
+}
+
+.timesheet-table__cell timesheet-table__cell--work-duration {
+    width: 2%; /* 勤務時間の幅 */
+}
+
+
+/* メンバー一覧テーブル ② */
+/* メンバー一覧テーブルのボディ */
+.timesheet-table__body{
+    text-align: center; /* セルの内容を中央揃え */
+}
+
+/* メンバー一覧テーブルのセル */
+.timesheet-table__row {
+    height: 60px; /* 行の高さを指定 */
+    padding: 10px 0; /* 上下の余白を追加 */
+    border-bottom: 1.7px solid #aaaaaa;
+    text-align: center;
+    word-wrap: break-word; /* 長いテキストを折り返す */
+}
+/* ページネーション */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.pagination__list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination__item {
+    margin: 0 2px;
+}
+
+.pagination__link {
+    padding: 4px 12px;
+    border: 1px solid blue;
+    color: blue;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.pagination__item--active .pagination__link {
+    background-color: blue;
+    color: white;
+    border-color: blue;
+}
+
+.pagination__link:hover {
+    background-color: blue;
+    color: white;
+}
+/* Attendance page specific responsive adjustments */
+@media (min-width: 1440px) {
+    .date-list__nav-button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    .schedule-table__header, .schedule-table__cell {
+        padding: 15px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 0;
+        max-width: 100%; /* モバイル画面では幅を全体に広げる */
+    }
+
+    .header-nav {
+        gap: 10px; /* モバイルでのナビゲーションリンク間のスペースを調整 */
+    }
+
+    .header-nav-item a {
+        padding: 8px;
+        font-size: 14px; /* フォントサイズを小さめに */
+    }
+}
