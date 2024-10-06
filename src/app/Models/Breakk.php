@@ -17,7 +17,7 @@ class Breakk extends Model
 
     public function date()
     {
-        return $this->belongsTo(Date::class, 'date_id');
+        return $this->belongsTo(WorkDate::class, 'date_id');
     }
 }
 
