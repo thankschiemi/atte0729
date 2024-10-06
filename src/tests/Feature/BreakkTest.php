@@ -20,7 +20,9 @@ class BreakkTest extends TestCase
         // Memberモデルのダミーデータを作成
         $member = Member::factory()->create();
 
+
         // WorkDateモデルのダミーデータを作成 (Memberと関連付け)
+
         $date = WorkDate::factory()->create([
             'member_id' => $member->id,  // MemberのIDを関連付け
         ]);
