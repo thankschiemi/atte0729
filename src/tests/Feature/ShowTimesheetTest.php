@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Member;
-use App\Models\Date;  // Dateモデルをインポート
+use App\Models\WorkDate;  // WorkDateモデルをインポート
 use Carbon\Carbon;
 
 class ShowTimesheetTest extends TestCase
@@ -19,7 +19,7 @@ class ShowTimesheetTest extends TestCase
         $this->actingAs($user);
 
         // 勤怠情報を作成
-        Date::factory()->create([
+        WorkDate::factory()->create([
             'member_id' => $user->id,
             'date' => Carbon::today(),
         ]);
