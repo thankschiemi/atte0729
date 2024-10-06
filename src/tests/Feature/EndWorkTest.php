@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Member;
-use App\Models\Date;
+use App\Models\WorkDate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -27,7 +27,7 @@ class EndWorkTest extends TestCase
         $today = Carbon::today()->toDateString();
 
         // 勤務開始のデータを事前に作成
-        Date::create([
+        WorkDate::create([
             'member_id' => $member->id,
             'date' => $today,
             'start_work' => Carbon::now(),
