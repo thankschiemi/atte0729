@@ -125,7 +125,7 @@ class AttendanceController extends Controller
          $user = Member::findOrFail($userId);
      
          // 該当する月の勤怠情報を取得
-         $timesheets = Date::where('member_id', $userId)
+         $timesheets =WorkDate::where('member_id', $userId)
                              ->whereYear('date', $currentMonth->year)
                              ->whereMonth('date', $currentMonth->month)
                              ->paginate(5);
