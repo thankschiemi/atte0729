@@ -9,9 +9,9 @@ class FileUploadController extends Controller
 {
     public function upload(Request $request)
     {
-        // バリデーション
+        // バリデーション: 最大10MB、jpg, png, pdfファイルのみを許可
         $request->validate([
-            'file' => 'required|file|max:10240', // 最大10MBのファイルを許可
+            'file' => 'required|file|mimes:jpg,png,pdf|max:10240', // 最大10MB
         ]);
 
         // ファイルをS3にアップロード
