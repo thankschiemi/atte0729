@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Member;
-use App\Models\Date;
+use App\Models\WorkDate;
 use App\Models\Breakk;
 use Carbon\Carbon;
 
@@ -19,7 +19,7 @@ class EndBreakTest extends TestCase
     $this->actingAs(Member::factory()->create());
 
     // 事前に勤務データと休憩開始データを作成
-    $date = Date::factory()->create([
+    $date = WorkDate::factory()->create([
         'member_id' => 1,
         'date' => Carbon::today(),
         'start_work' => Carbon::now(),
