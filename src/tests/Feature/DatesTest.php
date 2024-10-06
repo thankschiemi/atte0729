@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Models\Date; // Dateモデルを使用
+use App\Models\WorkDate; // Dateモデルを使用
 use App\Models\Member; // 関連するMemberモデル
 
 class DatesTest extends TestCase
@@ -22,7 +22,7 @@ class DatesTest extends TestCase
         $member = Member::factory()->create();
 
         // 日付データを作成
-        $date = Date::create([
+        $date = WorkDate::create([
             'date' => '2024-09-26',
             'member_id' => $member->id, // Memberとの関連
         ]);
@@ -42,7 +42,7 @@ class DatesTest extends TestCase
     public function test_can_retrieve_date()
     {
         $member = Member::factory()->create();
-        $date = Date::create([
+        $date = WorkDate::create([
             'date' => '2024-09-26',
             'member_id' => $member->id,
         ]);
@@ -60,7 +60,7 @@ class DatesTest extends TestCase
     public function test_can_update_date()
     {
         $member = Member::factory()->create();
-        $date = Date::create([
+        $date = WorkDate::create([
             'date' => '2024-09-26',
             'member_id' => $member->id,
         ]);
@@ -82,7 +82,7 @@ class DatesTest extends TestCase
     public function test_can_delete_date()
     {
         $member = Member::factory()->create();
-        $date = Date::create([
+        $date = WorkDate::create([
             'date' => '2024-09-26',
             'member_id' => $member->id,
         ]);
