@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Member;
-use App\Models\Date;
+use App\Models\WorkDate;
 use App\Models\Breakk; // Breakkモデルを追加
 use Carbon\Carbon;
 //use Illuminate\Support\Facades\Log; // Logクラスをインポート
@@ -21,7 +21,7 @@ class StartBreakTest extends TestCase
     $this->actingAs($member);
 
     // 事前に勤務データを作成
-    $date = Date::factory()->create([
+    $date = WorkDate::factory()->create([
         'member_id' => $member->id,
         'date' => Carbon::today()->toDateString(),
         'start_work' => Carbon::now(),
