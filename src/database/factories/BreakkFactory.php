@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Breakk;
-use App\Models\Date;
+use App\Models\WorkDate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 
