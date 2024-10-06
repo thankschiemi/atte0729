@@ -111,4 +111,36 @@ class AttendanceController extends Controller
             'nextDate' => $nextDate
         ]);
     }
+         // 勤怠表
+     public function showTimesheet($userId, $yearMonth = null)
+     {
+         // 年月を取得（指定がない場合は現在の年月を使用）
+         $currentMonth = $yearMonth ? Carbon::parse($yearMonth) : Carbon::now()->startOfMonth();
+         
+         // 前月と翌月を計算
+         $prevMonth = $currentMonth->copy()->subMonth()->format('Y-m');
+         $nextMonth = $currentMonth->copy()->addMonth()->format('Y-m');
+         
+         // ユーザー情報を取得
+         $user = Member::findOrFail($userId);
+     
+         // 該当する月の勤怠情報を取得
+         $timesheets = Date::where('member_id', $userId)
+                             ->whereYear('date', $currentMonth->year)
+                             ->whereMonth('date', $currentMonth->month)
+                             ->paginate(5);
+       // ビューにデータを渡す
+       return view('atte-attendance-page', compact('user', 'timesheets', 'currentMonth', 'prevMonth', 'nextMonth'));
+    }
+    public function redirectToOwnTimesheet()
+    {
+        // ログインしているユーザー情報を取得
+        $user = Auth::user();
+    
+        // 現在の年月を取得
+        $yearMonth = Carbon::now()->format('Y-m');
+    
+        // ユーザーの勤怠表ページにリダイレクト
+        return redirect()->route('attendance.timesheet', ['userId' => $user->id, 'yearMonth' => $yearMonth]);
+    }
 }
