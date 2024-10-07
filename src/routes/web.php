@@ -8,9 +8,10 @@ use App\Http\Controllers\StampController;
 use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\FileUploadController;
 
-// web ミドルウェアを適用したルートグループ
-Route::middleware(['web'])->group(function () {
+    //ミドルウェアを適用したルートグループ
+    Route::middleware(['web'])->group(function () {
     Auth::routes(['verify' => true]);  // メール認証を有効にする
 
     // 会員登録ページ
@@ -61,9 +62,6 @@ Route::middleware(['web'])->group(function () {
         return redirect()->route('attendance.timesheet', ['userId' => Auth::id(), 'yearMonth' => $yearMonth]);
     })->middleware(['auth', 'verified']);
 });
-
-
-
 
 
 

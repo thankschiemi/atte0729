@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\WorkDate;
+
+use App\Models\WorkDate;// WorkDate モデルを使用
 use App\Models\Member; // Member モデルを追加
 use Carbon\Carbon;
 
@@ -23,7 +24,9 @@ class StampController extends Controller
         $existingDate = $member->dates()->whereDate('date', $today)->first();
 
         if (is_null($existingDate)) {
-            $date = new WorkDate([
+
+            $date = new WorkDate([ // WorkDate モデルを使用
+
                 'member_id' => $member->id,
                 'date' => $today,
                 'start_work' => Carbon::now(),

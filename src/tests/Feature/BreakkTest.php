@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Breakk; // Breakkモデルを使用
-use App\Models\Date;   // Dateモデルを使用
+use App\Models\WorkDate;   // Dateモデルを使用
 use App\Models\Member; // Memberモデルを使用
 
 class BreakkTest extends TestCase
@@ -20,8 +20,10 @@ class BreakkTest extends TestCase
         // Memberモデルのダミーデータを作成
         $member = Member::factory()->create();
 
-        // Dateモデルのダミーデータを作成 (Memberと関連付け)
-        $date = Date::factory()->create([
+
+        // WorkDateモデルのダミーデータを作成 (Memberと関連付け)
+
+        $date = WorkDate::factory()->create([
             'member_id' => $member->id,  // MemberのIDを関連付け
         ]);
 

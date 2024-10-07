@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Member;
-use App\Models\Date;
+use App\Models\WorkDate;
 use Carbon\Carbon;
 
 class StartWorkTest extends TestCase

@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Date;
+use App\Models\WorkDate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 
 class DateFactory extends Factory
 {
-    protected $model = Date::class;
+    protected $model = WorkDate::class;
 
     public function definition()
     {

@@ -15,7 +15,7 @@ class BreakkFactory extends Factory
     public function definition()
 {
     return [
-        'date_id' => Date::factory(),
+        'date_id' => WorkDate::factory(),
         'start_break' => $this->faker->dateTimeBetween('-2 hours', 'now'),
         'end_break' => null,
     ];

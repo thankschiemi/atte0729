@@ -9,15 +9,23 @@ class Breakk extends Model
 {
     use HasFactory;
 
+    protected $table = 'breakks'; // テーブル名を明示的に設定
+
     protected $fillable = [
         'date_id',
         'start_break',
         'end_break',
     ];
 
-    public function date()
+    protected $casts = [
+        'start_break' => 'datetime',
+        'end_break' => 'datetime',
+    ];
+
+    public function workDate()
     {
-        return $this->belongsTo(Date::class, 'date_id');
+        return $this->belongsTo(WorkDate::class, 'date_id');
     }
 }
+
 
