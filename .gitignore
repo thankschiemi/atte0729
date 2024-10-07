@@ -6,3 +6,4 @@ vendor/
 !.gitkeep
 .env
 >>>>>>> 335918926c1f40c55c45ef79e31e5a5d755725dd
+/vendor
