@@ -52,18 +52,23 @@ class ViewPagesTest extends TestCase
     
     public function test_timesheets_page_is_accessible()
 {
-    $member = Member::factory()->create(['email_verified_at' => now()]); // メール認証済みのメンバーを作成
-    $response = $this->actingAs($member)->get('/timesheets'); // リダイレクトを確認
-    $response->assertRedirect(); // リダイレクトを確認
+    // メール認証済みのユーザーを作成
+    $member = Member::factory()->create(['email_verified_at' => now()]); 
+
+    // 認証されたユーザーとしてリクエストを送信し、リダイレクトを確認
+    $response = $this->actingAs($member)->get('/timesheets');
+
+    // リダイレクトのステータスを確認
+    $response->assertStatus(302); // リダイレクトのステータスが302であることを確認
+    $response->assertRedirect(); // リダイレクトが発生することを確認
 
     // リダイレクト先のURLを取得
     $redirectUrl = $response->getTargetUrl();
-    $response = $this->get($redirectUrl); // リダイレクト先にアクセス
-
-    $response->assertStatus(200);
-    $response->assertViewIs('atte-attendance-page'); // ビュー名を修正
+    
+    // リダイレクト先にアクセスしてステータスとビュー名を確認
+    $response = $this->actingAs($member)->get($redirectUrl); // 認証状態を再度確認しながらアクセス
+    $response->assertStatus(200); // ステータスコードが200であることを確認
+    $response->assertViewIs('atte-attendance-page'); // ビュー名が正しいことを確認
 }
 
-
-        
 }
