@@ -26,7 +26,7 @@ use App\Http\Controllers\FileUploadController;
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
     // 打刻ページ（ログイン + メール認証済みが必要）
-    Route::get('/', [StampController::class, 'index'])->middleware(['auth', 'verified']);
+    Route::get('/', [StampController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
     // 各ボタンの状態
     Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('attendance.startWork')->middleware(['auth', 'verified']);
